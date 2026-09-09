@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Aesthetic Advisory - Clinic Catalyst Growth Plan</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark: #0A2A28;
+  --dark-alt: #0D3D38;
+  --teal: #00B4A0;
+  --teal-bright: #00D4BC;
+  --peach: #E8A87C;
+  --peach-light: #F5C7A0;
+  --white: #FFFFFF;
+  --text-faint: rgba(255,255,255,0.6);
+  --text-mid: rgba(255,255,255,0.85);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Open Sans',sans-serif; background:#000; color:var(--white); overflow:hidden; }
+.deck { height:100vh; overflow-y:auto; scroll-snap-type:y mandatory; }
+.slide { height:100vh; scroll-snap-align:start; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.slide-html { padding:3rem 4rem; background:linear-gradient(160deg, #0A2A28 0%, #0E3D3A 40%, #0A2A28 100%); }
+.slide-html.alt { background:linear-gradient(160deg, #0D3D38 0%, #0A2A28 50%, #0D3D38 100%); }
+.slide-html.teal-bg { background:linear-gradient(135deg, #073B36 0%, #0A2A28 100%); }
+.inner { max-width:1100px; width:100%; position:relative; z-index:2; }
+.dot-overlay { position:absolute; inset:0; opacity:0.05; background-image:radial-gradient(circle,var(--teal) 1px,transparent 1px); background-size:50px 50px; pointer-events:none; }
+.glow { position:absolute; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(0,180,160,0.12) 0%,transparent 70%); pointer-events:none; }
+.glow-tl { top:-200px; left:-200px; }
+.glow-br { bottom:-200px; right:-200px; }
+.label { font-family:'Montserrat',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--teal-bright); margin-bottom:0.75rem; }
+.label-peach { color:var(--peach); }
+h2 { font-family:'Montserrat',sans-serif; font-size:clamp(1.4rem,3vw,2.2rem); font-weight:800; text-transform:uppercase; line-height:1.1; margin-bottom:1rem; }
+h3 { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; text-transform:uppercase; margin-bottom:0.6rem; }
+.teal { color:var(--teal-bright); }
+.peach { color:var(--peach); }
+p { font-size:0.9rem; color:var(--text-mid); font-weight:300; line-height:1.8; }
+.split { display:grid; grid-template-columns:2fr 3fr; gap:3rem; align-items:center; }
+.split-even { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:center; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.mt-1 { margin-top:1rem; }
+.task-num { font-family:'Montserrat',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--peach); display:inline-block; border:1px solid rgba(232,168,124,0.3); padding:0.25rem 0.7rem; border-radius:4px; margin-bottom:0.8rem; }
+.quote { border-left:3px solid var(--peach); padding:0.8rem 1.2rem; margin-bottom:1.5rem; background:rgba(232,168,124,0.04); border-radius:0 6px 6px 0; }
+.quote p { font-style:italic; color:var(--peach-light); font-size:1rem; line-height:1.5; }
+.browser-frame { border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.1); background:#111; }
+.browser-bar { height:28px; background:#1a1a1a; display:flex; align-items:center; padding:0 10px; gap:6px; }
+.browser-dot { width:8px; height:8px; border-radius:50%; background:#333; }
+.browser-dot.r { background:#ff5f56; }
+.browser-dot.y { background:#ffbd2e; }
+.browser-dot.g { background:#27c93f; }
+.browser-frame img { width:100%; display:block; }
+.scroll-arrow { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); text-align:center; z-index:10; animation:bounce 2s infinite; cursor:pointer; }
+.scroll-arrow span { display:block; font-family:'Montserrat',sans-serif; font-size:0.6rem; font-weight:600; color:rgba(255,255,255,0.4); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.4rem; }
+.scroll-arrow .arrow { font-size:1.8rem; color:var(--teal-bright); }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+.demo-link { display:inline-flex; align-items:center; gap:0.4rem; color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-size:0.72rem; font-weight:700; text-decoration:none; letter-spacing:0.08em; text-transform:uppercase; margin-top:1rem; transition:color 0.2s; }
+.demo-link:hover { color:#00ffec; }
+.card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:1.3rem; }
+.card h4 { font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--teal-bright); margin-bottom:0.4rem; }
+.card p { font-size:0.8rem; color:var(--text-faint); line-height:1.6; }
+.price-card { background:rgba(0,180,160,0.06); border:2px solid var(--teal); border-radius:12px; padding:1.6rem 1.8rem; text-align:center; }
+.price-tag { font-family:'Montserrat',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:900; color:var(--teal-bright); }
+.price-period { font-size:0.75rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; }
+.includes-list { list-style:none; text-align:left; margin-top:1rem; }
+.includes-list li { padding:0.3rem 0; font-size:0.76rem; color:var(--text-mid); border-bottom:1px solid rgba(255,255,255,0.04); display:flex; align-items:center; gap:0.4rem; }
+.includes-list li::before { content:"\2713"; color:var(--teal-bright); font-weight:700; }
+.discount-badge { display:inline-block; background:var(--peach); color:var(--dark); font-family:'Montserrat',sans-serif; font-size:0.7rem; font-weight:800; padding:0.35rem 0.9rem; border-radius:4px; text-transform:uppercase; letter-spacing:0.06em; margin-top:1rem; }
+.faq-item { padding:0.7rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+.faq-q { font-family:'Montserrat',sans-serif; font-size:0.75rem; font-weight:700; color:var(--peach); margin-bottom:0.3rem; }
+.faq-a { font-size:0.78rem; color:var(--text-faint); }
+.bul { list-style:none; padding:0; margin:0; }
+.bul li { display:flex; gap:0.5rem; font-size:0.82rem; color:var(--text-mid); line-height:1.6; margin-bottom:0.4rem; }
+.bul li span.d { color:var(--teal-bright); flex-shrink:0; }
+.kv { display:flex; align-items:baseline; gap:0.6rem; margin-bottom:0.5rem; }
+.kv b { color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.72rem; min-width:105px; flex-shrink:0; }
+.kv span { font-size:0.78rem; color:var(--text-mid); line-height:1.4; }
+.tbl { width:100%; max-width:1100px; border-collapse:collapse; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:8px; overflow:hidden; }
+.tbl th { text-align:left; padding:0.5rem 0.7rem; font-family:'Montserrat',sans-serif; font-size:0.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); border-bottom:1px solid rgba(255,255,255,.12); }
+.tbl td { padding:0.55rem 0.7rem; vertical-align:top; color:var(--text-mid); font-size:0.76rem; line-height:1.45; border-bottom:1px solid rgba(255,255,255,.08); }
+.tbl td:first-child { width:24%; }
+.tbl td strong { color:var(--teal-bright); }
+.slide-counter { position:fixed; bottom:1.2rem; right:1.5rem; font-family:'Montserrat',sans-serif; font-size:0.65rem; font-weight:600; color:rgba(255,255,255,0.25); letter-spacing:0.08em; z-index:100; }
+.nav-hint { position:fixed; bottom:1.2rem; left:1.5rem; font-family:'Montserrat',sans-serif; font-size:0.55rem; color:rgba(255,255,255,0.15); letter-spacing:0.08em; z-index:100; }
+@media print {
+  .deck { overflow:visible; scroll-snap-type:none; }
+  .slide { min-height:100vh; page-break-after:always; page-break-inside:avoid; }
+  .slide-counter, .nav-hint { display:none; }
+}
+@media (max-width:768px) {
+  .slide { min-height:100vh; padding:2rem 1.2rem; }
+  .slide-html { padding:2rem 1.2rem; }
+  .inner { width:100%; }
+  .split, .split-even, .grid-2 { grid-template-columns:1fr; gap:1.2rem; }
+  [style*="grid-template-columns"] { grid-template-columns:1fr !important; gap:1rem !important; }
+  h2 { font-size:1.2rem; margin-bottom:0.7rem; }
+  h3 { font-size:0.85rem; }
+  p { font-size:0.8rem; line-height:1.6; }
+  .quote { padding:0.5rem 0.8rem; margin-bottom:0.8rem; }
+  .quote p { font-size:0.85rem; }
+  .card { padding:0.8rem; }
+  .card h4 { font-size:0.65rem; }
+  .card p { font-size:0.7rem; line-height:1.5; }
+  .browser-frame img { max-height:250px; object-fit:cover; }
+  .price-card { padding:1.2rem; }
+  .price-tag { font-size:1.8rem; }
+  .includes-list li { font-size:0.7rem; padding:0.25rem 0; }
+  .scroll-arrow, .slide-counter { display:none; }
+  .tbl td, .tbl th { font-size:0.66rem; padding:0.4rem; }
+}
+</style>
+</head>
+<body>
+<div id="inapp-banner" style="display:none; position:fixed; top:0; left:0; right:0; z-index:9999; background:var(--teal-bright); color:var(--dark); padding:10px 16px; text-align:center; font-family:'Montserrat',sans-serif; font-size:0.7rem; font-weight:700;">
+  For the best experience, <a href="" id="inapp-link" style="color:var(--dark); text-decoration:underline;">open in Safari</a> or Chrome
+</div>
+<div class="deck" id="deck">
+
+<!-- 1 COVER -->
+<section class="slide slide-html" style="background:radial-gradient(ellipse at center, #0E3D3A 0%, #0A2A28 60%, #071E1C 100%);">
+  <div class="dot-overlay"></div>
+  <div class="inner" style="text-align:center;">
+    <img src="assets/cc-wordmark.png" alt="Clinic Catalyst" style="height:40px; margin-bottom:3rem; opacity:0.9;">
+    <h2 style="font-size:clamp(2rem,4vw,3.2rem); letter-spacing:2px; margin-bottom:0.5rem;">When Moranbah<br>thinks skin,<br><span class="teal">it thinks of you.</span></h2>
+    <p style="max-width:520px; margin:1.5rem auto 2.5rem; font-size:1rem; color:var(--text-mid);">Prepared for Cassie Hardy, The Aesthetic Advisory</p>
+    <p style="font-size:0.85rem; color:var(--text-faint); margin-bottom:0.3rem;">9 September 2026</p>
+    <p style="font-size:0.7rem; color:rgba(255,255,255,0.35); letter-spacing:2px; text-transform:uppercase;">By <strong style="color:var(--teal-bright); font-weight:600;">Kelly Wotherspoon</strong> & <strong style="color:var(--teal-bright); font-weight:600;">Alicia Hagen</strong></p>
+  </div>
+  <div class="scroll-arrow" onclick="document.getElementById('deck').scrollBy({top:window.innerHeight,behavior:'smooth'})">
+    <span>Click to begin</span>
+    <div class="arrow">&#8595;</div>
+  </div>
+</section>
+
+<!-- 2 SOCIAL PROOF -->
+<section class="slide" style="padding:0; background:#000;"><img src="assets/social-proof.png" alt="Clinics we've worked with" style="width:100%; height:100%; object-fit:contain;"></section>
+
+<!-- 3 WHAT YOU'VE BUILT -->
+<section class="slide slide-html">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split" style="grid-template-columns:1fr 2fr; gap:2.5rem;">
+      <div style="text-align:center;">
+        <p class="label label-peach">Your clinic right now</p>
+        <h2 style="font-size:clamp(1.2rem,2.5vw,1.8rem);">What You've <span class="teal">Built Already</span></h2>
+        <img src="assets/cassie-portrait.jpg" alt="Cassie Hardy" style="width:100%; max-width:280px; border-radius:10px; margin-top:1.5rem; object-fit:cover; object-position:center 10%; aspect-ratio:3/4;">
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.9rem;">
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.8rem; color:var(--text-mid); line-height:1.5; margin:0;">Eighteen years in skin. Ten of them running your own business in Moranbah, nearly four owning and running a large skin clinic in town, then The Aesthetic Advisory built from scratch. Six of you now, with Emily on the socials and the DMs.</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.8rem; color:var(--text-mid); line-height:1.5; margin:0;">A $249 consultation that converts at about 80%. Observ imaging, a mini skin health facial, LED, and a plan with her own photos and the why behind every treatment and product. Nine times out of ten she buys every product recommended. Alicia has judged clinics across the country and rates this front-end offer as one of the best she has seen.</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.8rem; color:var(--text-mid); line-height:1.5; margin:0;">An Aesthetic Business Awards 2026 winner, in a town of 15,000 with no direct skin competitor, and word of mouth that already fills the book.</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.8rem; color:var(--text-mid); line-height:1.5; margin:0;">A full room: IPL, needling, Evo, DermaFrac, ASAP Micro Plus, Meso skin, LED and the Observ 520x. Aspect, Aspect Dr, Aspect Platinum and LIRA on the shelf, and an online shop already taking orders, some from interstate.</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.8rem; color:var(--text-mid); line-height:1.5; margin:0;">Socials that are genuinely good, Facebook ads running every day, and a website rebuild due next month. The timing for structuring it properly could not be better.</p></div>
+        <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:1rem;"><span style="color:var(--teal-bright); font-size:1.1rem; font-weight:700; flex-shrink:0;">&#10003;</span><p style="font-size:0.8rem; color:var(--text-mid); line-height:1.5; margin:0;">You already use AI to turn Observ images into language a client understands. "The minute you have a machine telling them what to do, they listen." The hard part of the report system is already in your hands.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 GOALS -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label label-peach">Tailored for The Aesthetic Advisory</p>
+    <h2>Your Goals & <span class="teal">Objectives</span></h2>
+    <div style="max-width:820px; margin-top:0.8rem;">
+      <div class="card" style="padding:1rem; margin-bottom:0.6rem;"><h4>1. Own Moranbah</h4><p>When someone in town thinks skin, they think The Aesthetic Advisory. You do not need everyone in Queensland to know you. You need the right people in and around Moranbah to know you, and that is a much more achievable goal.</p></div>
+      <div class="card" style="padding:1rem; margin-bottom:0.6rem;"><h4>2. More people into the $249 consultation</h4><p>Nothing about the consultation changes. If the 80% holds as the volume rises, this is the front door to the whole business, and every ad, page, post and partnership points at it.</p></div>
+      <div class="card" style="padding:1rem; margin-bottom:0.6rem;"><h4>3. The report in minutes, not 45</h4><p>Prepared while she is under the LED, presented while she is excited. The personal part stays exactly as it is. The repetition around it goes.</p></div>
+      <div class="card" style="padding:1rem; margin-bottom:0.6rem;"><h4>4. Emily off the DMs and into the community</h4><p>Rescheduling, reminders and the same ten questions handled by the system. Emily on partnerships, events, content and the conversations that need a human.</p></div>
+      <div class="card" style="padding:1rem;"><h4>5. Systemise it so you can replicate it</h4><p>The Aesthetic Advisory Method, documented and running on one system, so clinic two in the Whitsundays or the Central Highlands opens on the same consultation, the same CRM and the same reports. Before you are 45, without holding it all in your head.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 THE STRATEGY IN THREE -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <p class="label">The strategy, in plain English</p>
+    <span class="task-num">Task One</span>
+    <h2>Three things. <span class="teal">That is the whole strategy.</span></h2>
+    <p style="max-width:860px; margin:0.3rem 0 1rem; font-size:0.84rem;">What you do not need: another fifteen treatments, thousands a month into Facebook, or to market like a big-city clinic. You are in a town of about 15,000 people. That changes everything, and it is an advantage a Brisbane clinic cannot copy.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.8rem; max-width:1100px;">
+      <div class="card" style="padding:1rem 1.05rem;"><h4 style="margin-bottom:0.3rem;">1. Own Moranbah</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">Marketing in a town this size cannot live only online. The Aesthetic Advisory needs to be everywhere people already are: the sporting clubs, the school fundraisers, the gym, the hairdresser, the boutique, the women's networking group, the mining company's community days. Long-term partnerships, not 500 discount vouchers. Google owned now, before someone else does it. Reviews that mention the consultation and the Observ, because that is what people already talk about at the pub and at school pick-up.</p></div>
+      <div class="card" style="padding:1rem 1.05rem;"><h4 style="margin-bottom:0.3rem;">2. Fill the $249 consultation</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">Stop marketing machines. Nobody in Moranbah sits at home wondering whether she needs IPL, Evo or DermaFrac. She knows her pigmentation is annoying her, her skin is dry, her pores look huge, her acne keeps coming back, or her skin looks terrible after seven days at the mine. Every ad, page and post starts there and points at one thing: the consultation. And we film the consultation itself, start to finish, because the experience is the ad. Show her why it is worth $249.</p></div>
+      <div class="card" style="padding:1rem 1.05rem;"><h4 style="margin-bottom:0.3rem;">3. Systemise it so it can be replicated</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">The consultation already works. The back end takes too long and the follow-up lives in people's heads. We write down exactly what happens, step by step, turn it into scripts, templates and automations, put a CRM around Timely, and measure the numbers that matter, Skin Club above all. Then everything we build passes one test: can another team, another therapist, another coordinator in another town run it without you in the room? Yes means a business model. No means a busy clinic.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 CLAUDE TODAY -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label label-peach">Do this week, before anything is built</p>
+    <h2>Four things to do with <span class="teal">Claude</span> today</h2>
+    <p style="max-width:800px; margin:0.5rem 0 1rem; font-size:0.84rem; color:var(--text-mid);">You already use AI to read Observ images in client language. That is the hard part done. These four extend it, take an hour each to set up, and cost nothing. Kelly walks you through them on the call.</p>
+    <div style="max-width:940px;">
+      <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:0.9rem 1rem; margin-bottom:0.5rem;"><span style="color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; flex-shrink:0; min-width:1.4rem;">01</span><div><h4 style="margin-bottom:0.2rem;">The report, first draft in five minutes</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">While she is under the LED, photograph the Observ screens and record a ninety-second voice note of what you are seeing. Drop both into Claude with one of your existing reports as the template. It drafts the findings in plain English, the why for each treatment and each product, in your voice. You read it, correct it, add the clinical call, and it goes into your Canva layout. This is the manual version of the system we build in week one.</p></div></div>
+      <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:0.9rem 1rem; margin-bottom:0.5rem;"><span style="color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; flex-shrink:0; min-width:1.4rem;">02</span><div><h4 style="margin-bottom:0.2rem;">One Aesthetic Advisory project, so everything sounds like you</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">A Claude project holding your voice, your treatments and prices, your products, the Skin Club, Moranbah and the 7-on 7-off roster, and the words that are not allowed in advertising. Emily writes captions, DM replies and emails inside it. Nothing goes out sounding like a template.</p></div></div>
+      <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:0.9rem 1rem; margin-bottom:0.5rem;"><span style="color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; flex-shrink:0; min-width:1.4rem;">03</span><div><h4 style="margin-bottom:0.2rem;">The 7/7 content month</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">Paste Alicia's seven roster hooks (slide 12) into the project and ask for a month of posts, one a day, each one something Emily can film in the clinic in ten minutes. Claude writes, Emily shoots. Local authority that a Brisbane clinic cannot fake.</p></div></div>
+      <div class="card" style="display:flex; gap:0.8rem; align-items:flex-start; padding:0.9rem 1rem;"><span style="color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem; flex-shrink:0; min-width:1.4rem;">04</span><div><h4 style="margin-bottom:0.2rem;">Skin Club, by hand for now</h4><p style="font-size:0.76rem; color:var(--text-mid); line-height:1.5; margin:0;">Export your clients from Timely and ask Claude for four numbers: active Skin Club members, their average monthly value, how long they stay, and who has not been in for eight weeks. That is the number that runs the business, before the dashboard is built to show it every Monday.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 WEBSITE & SEO -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Two</span>
+        <h2>Website & <span class="teal">Local SEO</span></h2>
+        <div class="quote"><p>The rebuild is due next month. Now is the moment to structure it properly, before it launches, not after.</p></div>
+        <ul class="bul">
+          <li><span class="d">&#8226;</span> Start with your concern, on every page: acne, pigmentation, dry and dehydrated, pores, fine lines, texture, skin after seven days on site. Then one line everywhere: "Not sure? Start with the $249 skin consultation." The website's only job is to feed the consultation.</li>
+          <li><span class="d">&#8226;</span> Fix the door. The booking buttons on the site and on Instagram currently go nowhere while Timely comes back. Every button points at one booking link, and a lead who does not book is captured anyway.</li>
+          <li><span class="d">&#8226;</span> Own Google now, while competition is low: Google Business Profile, Maps, reviews, FAQs, photos, a Moranbah page and a concern page each. When anyone searches skin in Moranbah, you are everywhere they look.</li>
+          <li><span class="d">&#8226;</span> Google Ads, kept tight. Their job is to catch intent: "skin clinic Moranbah", "acne treatment Moranbah", "pigmentation Moranbah", each landing on its exact page. Meta and the community create the awareness, Google catches it.</li>
+          <li><span class="d">&#8226;</span> The shop stays and grows. Skin Club replenishment, the site bag, delivered anywhere in Australia.</li>
+        </ul>
+        <a href="https://clinic-catalyst-au.github.io/the-aesthetic-advisory/website.html" target="_blank" class="demo-link">Open the website concept &#8594;</a>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/website-concept-screenshot.png" alt="The Aesthetic Advisory website concept">
+        </div>
+        <p style="font-size:0.68rem; color:var(--text-faint); margin-top:0.5rem; font-style:italic;">Concept built on your logo and clinic photography. The palette is a placeholder until yours arrives. Hero footage is stock until we film the consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 OFFER: THE CONSULTATION IS THE HERO -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Three</span>
+        <h2>The $249 consultation <span class="teal">is the hero</span></h2>
+        <div class="quote"><p>"People don't want to be sold to. No one ever explains why."</p></div>
+        <p style="font-size:0.78rem; color:var(--text-mid); margin-bottom:0.7rem;">Do not fix what is not broken. Three doors, and the first one is already built:</p>
+        <div style="background:rgba(0,180,160,0.06); border:1px solid rgba(0,180,160,0.25); border-radius:6px; padding:0.6rem 0.85rem; margin-bottom:0.5rem;">
+          <p style="font-size:0.68rem; color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.15rem;">The Consultation</p>
+          <p style="font-size:0.78rem; color:var(--text-mid); line-height:1.45; margin:0;">Observ imaging, mini skin health facial, LED, the personalised plan. Your front door. Now every ad, page, post, partnership and referral points at it, and the skin assessment fills it.</p>
+        </div>
+        <div style="background:rgba(0,180,160,0.06); border:1px solid rgba(0,180,160,0.25); border-radius:6px; padding:0.6rem 0.85rem; margin-bottom:0.5rem;">
+          <p style="font-size:0.68rem; color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.15rem;">The Plan</p>
+          <p style="font-size:0.78rem; color:var(--text-mid); line-height:1.45; margin:0;">Her own images on screen, why this treatment, why this product, why this order. The positioning writes itself: "We don't just tell you what your skin needs. We show you why." That line goes on the website, the ads and the front window.</p>
+        </div>
+        <div style="background:rgba(232,168,124,0.08); border:1px solid rgba(232,168,124,0.3); border-radius:6px; padding:0.6rem 0.85rem; margin-bottom:0.8rem;">
+          <p style="font-size:0.68rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.15rem;">Skin Club</p>
+          <p style="font-size:0.78rem; color:var(--text-mid); line-height:1.45; margin:0;">Where the consultation goes. A $249 client who becomes a twelve-month member buying her products is not worth $249, she is worth thousands. Skin Club becomes the number the business runs on.</p>
+        </div>
+        <a href="https://clinic-catalyst-au.github.io/the-aesthetic-advisory/assessment.html" target="_blank" class="demo-link">Try the Skin Assessment Demo &#8594;</a>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/assessment-screenshot.png" alt="Skin assessment demo">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 OFFER CRAFTING -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label label-peach">How Alicia and Kelly craft an offer</p>
+    <h2>Her concern in, <span class="teal">the consultation out.</span> Then the room does the rest.</h2>
+    <p style="max-width:880px; margin:0.4rem 0 0.9rem; font-size:0.82rem; color:var(--text-mid); line-height:1.5;">The ad speaks to the concern in her words and points at one thing, the consultation, without promising an outcome, which keeps it inside the advertising rules. She books. In the room, the Observ and the plan do the selling, and your team has the script for what comes next: the course, the homecare, the Skin Club, the friend she brings. The consultation gets her through the door. The plan is where the value is.</p>
+    <table class="tbl">
+      <tr><th>The concern, in her words</th><th>The front-end offer</th><th>In the room: the script</th></tr>
+      <tr><td><strong>"My pigmentation keeps coming back"</strong></td><td>The $249 consultation. The Observ's UV mode shows her the pigment sitting under the surface that her mirror cannot see.</td><td>A staged course in clinic, SPF every morning on site, brightening homecare from the shop, progress photos on the Observ each visit. Skin Club offered at the plan.</td></tr>
+      <tr><td><strong>"My skin looks bloody terrible after seven days at the mine"</strong></td><td>The $249 consultation, booked early in her swing so her skin has time to settle before she flies out.</td><td>Barrier repair in clinic, the site bag (the three products that actually go in the bag), a Skin Club rhythm timed to her roster, replenishment before she runs out.</td></tr>
+      <tr><td><strong>"My acne keeps coming back"</strong> (the younger client)</td><td>The $249 consultation. The cause first, then the marks.</td><td>A calming course, homecare that survives a week on site, Skin Club to hold it, and with her consent, her journey filmed as a case study the next twenty-five-year-old in town will recognise.</td></tr>
+      <tr><td><strong>Every client, every quarter</strong></td><td>A Skin Club night with a revenue target. Members and clients invited, bring a friend to her first consultation, product giveaways, Observ demos on the night, an offer only available in the room, and the partner businesses in the door.</td><td>We give you the run sheet: the invite from the database, the friend incentive, the demo schedule, the memberships and packages sold on the night, and the next night benchmarked against the last.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 10 ADVERTISING -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Four</span>
+        <h2>Advertising, <span class="teal">Moranbah-sized</span></h2>
+        <div class="quote"><p>$2 to $3 a day without a funnel tells us nothing. A small town needs good creative and a clear path.</p></div>
+        <div>
+          <div class="kv"><b>Campaign 1</b><span>The consultation, filmed: arrival, Observ, facial, LED, the plan on screen. Hook: "Have you ever actually seen what's happening underneath your skin?" CTA: book the $249 consultation.</span></div>
+          <div class="kv"><b>Campaign 2</b><span>Moranbah skin. Dry climate, the 7/7 roster, pigmentation, acne, ageing. Same funnel, a different reason to walk in. Talks like it lives here.</span></div>
+          <div class="kv"><b>Campaign 3</b><span>Retargeting, small budget. Anyone who visited, watched, engaged or messaged and did not book keeps seeing you: education, the team, Skin Club, then another CTA. In a small market, familiarity is trust.</span></div>
+          <div class="kv"><b>Google</b><span>Tight. "Skin clinic Moranbah", "facial Moranbah", "acne treatment Moranbah". Each lands on its exact page. Conversions fire on a booking, never a reschedule.</span></div>
+          <div class="kv"><b>The measure</b><span>Spend, consultations booked, attended, joined Skin Club, bought retail. Cost per consultation and per client, by source, every Monday.</span></div>
+          <div class="kv"><b>Compliance</b><span>Concern-led, no outcome promises, the banned words filtered. Every ad, page and reply through the compliance layer.</span></div>
+        </div>
+        <p style="font-size:0.68rem; color:var(--text-faint); margin-top:0.5rem; font-style:italic;">Ad set on Alicia's layouts with your clinic photography. Geo-targeted to Moranbah and surrounds.</p>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/ad-mockups-combined.png" alt="Concern-led ad mockups for The Aesthetic Advisory">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 OWN MORANBAH: COMMUNITY + REFERRAL ENGINE -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <span class="task-num">Task Five</span>
+    <h2>Own Moranbah. <span class="teal">The community and the referral engine.</span></h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:0.6rem;">
+      <div class="card" style="padding:1rem 1.1rem;">
+        <h4>Be everywhere people already are</h4>
+        <p style="font-size:0.78rem; color:var(--text-mid); margin-bottom:0.5rem;">In a community this size, marketing cannot exist only online. Genuinely involved, not annoyingly. Meaningful long-term partnerships beat 500 vouchers.</p>
+        <p style="font-size:0.76rem; color:var(--text-faint); line-height:1.6;">Local sporting clubs &middot; women's events &middot; school and community fundraisers &middot; mining-company community days &middot; the gym &middot; hair salons &middot; bridal &middot; photographers &middot; boutiques &middot; cafes &middot; women's networking groups &middot; charity events &middot; the markets.</p>
+        <p style="font-size:0.76rem; color:var(--text-mid); margin-top:0.5rem;">Each partner gets a simple offer for their people: a first consultation, tracked by partner in the CRM, so you know which relationships bring clients and which bring lunch.</p>
+      </div>
+      <div class="card" style="padding:1rem 1.1rem;">
+        <h4>Systemise the word of mouth</h4>
+        <p style="font-size:0.78rem; color:var(--text-mid); margin-bottom:0.5rem;">You already run on referrals. Do not replace it. Give it a process, then automate the process so nobody has to remember who referred who.</p>
+        <div class="kv" style="margin-bottom:0.35rem;"><b style="min-width:80px;">Refer</b><span>After a great consultation, the system asks her to send one friend, with a link that is hers.</span></div>
+        <div class="kv" style="margin-bottom:0.35rem;"><b style="min-width:80px;">Friend books</b><span>The friend's consultation lands in the CRM tagged with who sent her.</span></div>
+        <div class="kv" style="margin-bottom:0.35rem;"><b style="min-width:80px;">Thank you</b><span>The referrer gets a clinic thank-you automatically. Not a discount, a privilege.</span></div>
+        <div class="kv" style="margin-bottom:0.35rem;"><b style="min-width:80px;">Skin Club</b><span>Members have referral privileges built into the membership, and the Skin Club night is where the friend meets the Observ.</span></div>
+        <div class="kv"><b style="min-width:80px;">Reviews</b><span>The Google review request goes out after the consultation, and asks about the education, the Observ and the plan, because that is what people already love.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 THE 7/7 CONTENT ENGINE + EMILY -->
+<section class="slide slide-html">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <span class="task-num">Task Six</span>
+    <h2>The 7/7 content engine. <span class="teal">Emily becomes the community manager.</span></h2>
+    <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:1.2rem; margin-top:0.5rem;">
+      <div class="card" style="padding:1rem 1.1rem;">
+        <h4>Seven hooks a Brisbane clinic cannot copy</h4>
+        <ul class="bul" style="margin-top:0.3rem;">
+          <li><span class="d">&#8226;</span> "What seven days on site does to your skin."</li>
+          <li><span class="d">&#8226;</span> "Your 7-on, 7-off skincare routine."</li>
+          <li><span class="d">&#8226;</span> "The products I'd actually take to site."</li>
+          <li><span class="d">&#8226;</span> "Why your skin feels completely different halfway through your swing."</li>
+          <li><span class="d">&#8226;</span> "Dry Moranbah skin? Here's what I see every week."</li>
+          <li><span class="d">&#8226;</span> "What we see under the Observ that you can't see in your bathroom mirror."</li>
+          <li><span class="d">&#8226;</span> "Home for seven days? Here's when I'd book your treatments."</li>
+        </ul>
+        <p style="font-size:0.74rem; color:var(--text-faint); margin-top:0.5rem;">Plus the consultation itself, filmed start to finish, cut into the hero ad, the website and a month of reels.</p>
+      </div>
+      <div>
+        <div class="card" style="padding:0.9rem 1rem; margin-bottom:0.7rem;">
+          <h4>Emily's new mandate</h4>
+          <p style="font-size:0.76rem; color:var(--text-mid);">Not "make content". Make The Aesthetic Advisory part of Moranbah. With the DMs, rescheduling and reminders off her plate, she runs partnerships, events, local collaborations, client stories and the conversations that need a human. Content pillars: education, team personalities, behind the scenes, local businesses and events, roster-life tips, the climate, Observ footage, skin journeys, FAQs. The clinic should feel like "our skin clinic", not a luxury brand that could be anywhere.</p>
+        </div>
+        <div class="card" style="padding:0.9rem 1rem; margin-bottom:0.7rem;">
+          <h4>Staff spotlights</h4>
+          <p style="font-size:0.76rem; color:var(--text-mid);">Each of the six has a special interest or a gift. We find it, film it and build a series around each person. A month of content per therapist, and a person clients ask for by name.</p>
+        </div>
+        <div class="card" style="padding:0.9rem 1rem;">
+          <h4>Follow your clients</h4>
+          <p style="font-size:0.76rem; color:var(--text-mid);">With consent, a handful of clients followed through the whole journey: the consultation, the Observ, each session, the review photos, how they feel at the end. Each one is a written case study for the site and a social series that runs for months. Proof, told by the people who lived it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 CRM & AUTOMATION -->
+<section class="slide slide-html alt">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num">Task Seven</span>
+        <h2>CRM & <span class="teal">Automation</span></h2>
+        <div class="quote"><p>"I have everything in my brain. I don't have the time. I need someone to action it for me."</p></div>
+        <ul class="bul">
+          <li><span class="d">&#8226;</span> Timely stays for the booking. Around it goes a proper marketing and lead system, your own GHL account in your name, joined to Timely so a booking is a booking and a lead who did not book is never lost.</li>
+          <li><span class="d">&#8226;</span> Automated, in your voice: new enquiries, consultation information, booking links, didn't-book follow-up, reminders, rescheduling, post-consultation follow-up, treatment-plan follow-up, Skin Club nurture, rebooking, lapsed clients, birthdays, reviews, referrals, product replenishment, database campaigns.</li>
+          <li><span class="d">&#8226;</span> The after-hours assistant on the inbox and the DMs, trained on your clinic, your prices and your roster clients, answering and booking the consultation at 9pm from site, and flagging anything clinical to the team.</li>
+          <li><span class="d">&#8226;</span> The business brain. One document holds who The Aesthetic Advisory is: the treatments and prices, the products, the Skin Club, the Method, your voice, the rules. The assistant, the captions, the emails, the ladder and the reports all read from it. Change a price once and every system picks it up. When clinic two opens, it gets a copy.</li>
+          <li><span class="d">&#8226;</span> Emily gets her hours back for community, content and conversations.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/crm-nurture-mockup.png" alt="CRM and nurture automation">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 FOLLOW-UP THAT RUNS ITSELF -->
+<section class="slide slide-html">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <span class="task-num">Task Seven, continued</span>
+    <h2>Follow-up that <span class="teal">runs itself</span></h2>
+    <p style="max-width:880px; margin:0.4rem 0 0.9rem; font-size:0.84rem; color:var(--text-mid); line-height:1.5;">Five pieces of the same system. None of them need a person to remember anything, and all of them speak in The Aesthetic Advisory's voice from the business brain.</p>
+    <ul class="bul" style="max-width:1080px;">
+      <li><span class="d">&#8226;</span> The post-consultation ladder. Today she leaves with her plan and everyone hopes. From now on: Day 1, a short personal text, "It was lovely seeing you yesterday, your plan is attached, reply here with any questions." Day 3, a little education about the pathway you recommended. Day 7, Emily or the therapist reaches out. Day 14 and on, a slower nurture for the ones who are not ready. Nobody has to chase.</li>
+      <li><span class="d">&#8226;</span> The Skin Club rhythm. Bookings planned around her roster, a reminder before she flies home, product replenishment before she runs out, ordered from the shop with one tap. The membership feels looked after, which is why it renews.</li>
+      <li><span class="d">&#8226;</span> The newsletter engine. Each month the system writes four editions in your voice from the business brain, one to educate, one from the team, one with a client journey, one with the Skin Club offer, loads them into GHL and sends them. Emily approves, nobody rebuilds anything.</li>
+      <li><span class="d">&#8226;</span> The re-engagement campaign. Everyone who has not booked in three months, pulled from Timely and segmented by what she last had done. A short personal text and email for each group, and every reply tracked to a booking. The money already sitting in your database.</li>
+      <li><span class="d">&#8226;</span> Reviews and referrals, at the right moment. The Google request after a consultation she loved, the refer-a-friend link after her first Skin Club month, the birthday note with something small. Timed by the system, not remembered by a person.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 15 THE REPORT IN MINUTES -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <p class="label label-peach">The bottleneck</p>
+    <h2>The report in minutes, <span class="peach">presented while she is still excited.</span></h2>
+    <p style="max-width:880px; margin-bottom:1rem; font-size:0.84rem;">The client experience is working. The back end is not: 30 to 45 minutes after she has gone. You want it under 30, produced while she is under the LED. We think it is under ten. We do not touch the personalised part, because that is why the consultation converts. We remove the rewriting of the same pigmentation explanation fifteen times a week.</p>
+    <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:0.7rem;">
+      <div class="card" style="padding:0.9rem;"><p style="font-size:0.62rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.4rem;">1. Observ</p><p style="font-size:0.76rem; color:var(--text-mid);">The images are captured as they are now. The therapist tags the findings on a short checklist on her phone: pigment, dehydration, congestion, texture, where.</p></div>
+      <div class="card" style="padding:0.9rem;"><p style="font-size:0.62rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.4rem;">2. Voice note</p><p style="font-size:0.76rem; color:var(--text-mid);">While the LED is on, ninety seconds of what she saw and what she is recommending, in her own words.</p></div>
+      <div class="card" style="padding:0.9rem;"><p style="font-size:0.62rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.4rem;">3. The draft</p><p style="font-size:0.76rem; color:var(--text-mid);">Claude builds the report in your template from the business brain: her images, what we are seeing in each, why this treatment, why this product, why this order, in your voice.</p></div>
+      <div class="card" style="padding:0.9rem;"><p style="font-size:0.62rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.4rem;">4. The human call</p><p style="font-size:0.76rem; color:var(--text-mid);">The therapist reads it, corrects it and adds the clinical recommendation. AI never decides what somebody needs. It stops the therapist retyping the explanation.</p></div>
+      <div class="card" style="padding:0.9rem;"><p style="font-size:0.62rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.4rem;">5. On screen</p><p style="font-size:0.76rem; color:var(--text-mid);">She sits back down and sees her skin, her plan and her homecare, then it is sent to her phone, the Skin Club is offered and the next appointment is booked before she leaves.</p></div>
+    </div>
+    <div class="card" style="margin-top:0.9rem; padding:0.9rem 1.1rem; background:rgba(0,180,160,0.06); border-color:rgba(0,180,160,0.25);">
+      <h4 style="margin-bottom:0.25rem; font-size:0.8rem;">What it is built from</h4>
+      <p style="font-size:0.74rem;">Your existing reports as the template. Pre-written explanations for every common finding, treatment and product, written once with you, then reused. Concern-based recommendations. The same words for the same finding, every therapist, every clinic. Which is also what makes it replicable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 16 THE AESTHETIC ADVISORY METHOD -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label">Built to be replicated</p>
+    <h2>The Aesthetic Advisory <span class="teal">Method</span></h2>
+    <p style="max-width:860px; margin:0.3rem 0 0.9rem; font-size:0.82rem;">Right now you have a great consultation. We turn it into a documented method, so when clinic two opens you do not reinvent it, you replicate it. Twelve steps, written down exactly as they happen, then the scripts, templates, automations, training and KPIs that sit under each one.</p>
+    <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:0.5rem; max-width:1100px;">
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">01</p><p style="font-size:0.72rem; color:var(--text-mid);">Welcome</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">02</p><p style="font-size:0.72rem; color:var(--text-mid);">Concerns and goals</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">03</p><p style="font-size:0.72rem; color:var(--text-mid);">Observ imaging</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">04</p><p style="font-size:0.72rem; color:var(--text-mid);">Analysis</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">05</p><p style="font-size:0.72rem; color:var(--text-mid);">Skin health facial</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">06</p><p style="font-size:0.72rem; color:var(--text-mid);">LED</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">07</p><p style="font-size:0.72rem; color:var(--text-mid);">Report prepared</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">08</p><p style="font-size:0.72rem; color:var(--text-mid);">Findings explained</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">09</p><p style="font-size:0.72rem; color:var(--text-mid);">Treatment pathway</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">10</p><p style="font-size:0.72rem; color:var(--text-mid);">Homecare</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">11</p><p style="font-size:0.72rem; color:var(--text-mid);">Skin Club</p></div>
+      <div class="card" style="padding:0.6rem 0.7rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700;">12</p><p style="font-size:0.72rem; color:var(--text-mid);">Rebooking</p></div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:0.9rem; max-width:1100px;">
+      <div class="card" style="padding:0.85rem 1rem;"><h4 style="margin-bottom:0.25rem;">Under each step</h4><p style="font-size:0.74rem; color:var(--text-mid); line-height:1.45;">The script the therapist says. The template the report uses. The automation that fires when the step is done. The training video for a new hire. The KPI that tells you it happened. All of it in the business brain, all of it version one of the operations manual for clinic two.</p></div>
+      <div class="card" style="padding:0.85rem 1rem;"><h4 style="margin-bottom:0.25rem;">The one test</h4><p style="font-size:0.74rem; color:var(--text-mid); line-height:1.45;">Can another team deliver the consultation? Another therapist produce the same report? Another coordinator follow the community plan? Another clinic use the same CRM? Can head office see the KPIs? Yes to all of it is a business model. If it still relies on you remembering how things are done, it is just another busy clinic.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 SKIN ASSESSMENT -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num" style="border-color:var(--peach); color:var(--peach);">Bonus</span>
+        <h2>Interactive <span class="peach">Skin Assessment</span></h2>
+        <div class="quote"><p>"Have you ever actually seen what is happening underneath your skin?"</p></div>
+        <ul class="bul">
+          <li><span class="d">&#8226;</span> Six questions in her words: the concern, her roster, how long, what she has tried, what she wants back, when she is next home. Then a note on what the Observ would look at first.</li>
+          <li><span class="d">&#8226;</span> Captures name, mobile and email last, once she is invested. Every completion is a warm lead with the concern and the roster already mapped.</li>
+          <li><span class="d">&#8226;</span> Lives on the website, the Instagram bio, the Facebook page and every partner's offer. Works at 9pm from site.</li>
+          <li><span class="d">&#8226;</span> Funnels into the $249 consultation, tagged by concern so the follow-up matches: pigmentation, dry and dehydrated, acne, pores and texture, fine lines, preventative. 7-on 7-off clients get consultation times that fit their swing.</li>
+        </ul>
+        <a href="https://clinic-catalyst-au.github.io/the-aesthetic-advisory/assessment.html" target="_blank" class="demo-link">Try the Demo &#8594;</a>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/skin-assessment-mockup.png" alt="Skin assessment quiz">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 RESULTS STRATEGY -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split">
+      <div>
+        <span class="task-num" style="border-color:var(--peach); color:var(--peach);">Bonus</span>
+        <h2>The results <span class="peach">strategy</span></h2>
+        <div class="quote"><p>You are skin only, so your results can be shown in the open. That is an advantage most clinics do not have.</p></div>
+        <ul class="bul">
+          <li><span class="d">&#8226;</span> The Observ takes the same photo in the same light every time, which is exactly what a before and after needs. Consent captured in the CRM at the consultation, one tap.</li>
+          <li><span class="d">&#8226;</span> A public results page on the site, by concern: pigmentation, acne, site skin, fine lines. Each one with the plan that produced it, in plain words, so the result sells the consultation rather than a machine.</li>
+          <li><span class="d">&#8226;</span> The same pairs become the retargeting ads, the Skin Club night slides and the case-study series Emily runs on Instagram.</li>
+          <li><span class="d">&#8226;</span> Concern-led captions, no outcome promises, results vary. The compliance layer checks every caption before it goes out.</li>
+        </ul>
+        <a href="https://clinic-catalyst-au.github.io/the-aesthetic-advisory/results.html" target="_blank" class="demo-link">Open the results page (placeholders) &#8594;</a>
+      </div>
+      <div>
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span></div>
+          <img src="assets/results-screenshot.png" alt="Results page concept">
+        </div>
+        <p style="font-size:0.68rem; color:var(--text-faint); margin-top:0.5rem; font-style:italic;">Generated placeholders, labelled as such, until your own Observ pairs come in with consent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19 THE MONDAY SCREEN -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <p class="label label-peach">The Monday screen</p>
+    <h2>One screen, every Monday. <span class="peach">Is the business getting easier to operate?</span></h2>
+    <p style="max-width:840px; margin-bottom:0.9rem; font-size:0.84rem;">Built from Timely, the ad accounts and the CRM, joined without a human, with the summary written for you: what happened last week, and the three things that need attention this week. If expansion is the goal, revenue is not the only number. This is the screen head office reads when there are three clinics.</p>
+    <div style="display:grid; grid-template-columns:repeat(6, 1fr); gap:0.6rem;">
+      <div class="card" style="padding:0.8rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem;">Consultation</p><ul class="bul"><li style="font-size:0.72rem; margin-bottom:0.2rem;">Booked</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Attended</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">To Skin Club</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">To treatment</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">To retail</li><li style="font-size:0.72rem;">Average value</li></ul></div>
+      <div class="card" style="padding:0.8rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem;">Skin Club</p><ul class="bul"><li style="font-size:0.72rem; margin-bottom:0.2rem;">Active members</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">New</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Cancellations</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Monthly value</li><li style="font-size:0.72rem;">12-month value</li></ul></div>
+      <div class="card" style="padding:0.8rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem;">Marketing</p><ul class="bul"><li style="font-size:0.72rem; margin-bottom:0.2rem;">Meta spend</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Google spend</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Cost per consult</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Cost per client</li><li style="font-size:0.72rem;">Revenue by source</li></ul></div>
+      <div class="card" style="padding:0.8rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem;">Community</p><ul class="bul"><li style="font-size:0.72rem; margin-bottom:0.2rem;">Referrals</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Referral source</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Partnerships</li><li style="font-size:0.72rem;">Clients by partner</li></ul></div>
+      <div class="card" style="padding:0.8rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem;">Team</p><ul class="bul"><li style="font-size:0.72rem; margin-bottom:0.2rem;">Utilisation</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Rebooking</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Retail</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Skin Club conversion</li><li style="font-size:0.72rem;">Average spend</li></ul></div>
+      <div class="card" style="padding:0.8rem;"><p style="font-size:0.6rem; color:var(--peach); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem;">Systems</p><ul class="bul"><li style="font-size:0.72rem; margin-bottom:0.2rem;">Admin hours</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Manual follow-ups</li><li style="font-size:0.72rem; margin-bottom:0.2rem;">Time to write a report</li><li style="font-size:0.72rem;">Response time</li></ul></div>
+    </div>
+    <div class="card" style="margin-top:0.9rem; padding:0.9rem 1.1rem; background:rgba(0,180,160,0.06); border-color:rgba(0,180,160,0.25);">
+      <h4 style="margin-bottom:0.25rem; font-size:0.8rem;">Skin Club is the number</h4>
+      <p style="font-size:0.74rem;">How many active members. Their average monthly value. Their twelve-month value. How long they stay. What they buy. How often they refer. This is where the business becomes predictable, and predictable is what a second clinic needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 20 TRANSITION -->
+<section class="slide slide-html teal-bg">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="glow glow-br"></div>
+  <div class="inner" style="text-align:center;">
+    <p class="label label-peach">Sound familiar?</p>
+    <h2 style="font-size:clamp(1.6rem,4vw,2.8rem); margin-bottom:1.5rem;">Growth Shouldn't Mean <span class="peach">It All Lives in Cassie's Head</span></h2>
+    <p style="max-width:680px; margin:0 auto 2rem; font-size:1rem;">The report written after she has gone. Emily on the DMs and the rescheduling. Booking buttons that go nowhere while the systems change. Ads with no way to tell what they did. And every process for clinic two sitting in your memory. In your words: "I need someone to action it for me."</p>
+    <h2 style="font-size:clamp(1.2rem,3vw,2rem);">That's Where <span class="teal">We Step In</span></h2>
+    <p style="max-width:620px; margin:1rem auto 0; font-size:0.85rem;">We come to Moranbah and build it in your clinic, with you and Emily in the room. One system under the business you already built: it fills the consultation, writes the report, follows up every client, and hands you one screen on Monday.</p>
+    <div style="margin:2rem auto 0; display:inline-block; background:rgba(0,180,160,0.08); border:1px solid rgba(0,180,160,0.2); border-radius:8px; padding:1rem 2rem;">
+      <p style="font-size:0.7rem; color:var(--teal-bright); font-family:'Montserrat',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">Kelly's proven systems</p>
+      <p style="font-size:1.1rem; color:var(--white); font-weight:600;">15+ hours reclaimed per week, within 7 days of going live</p>
+    </div>
+  </div>
+</section>
+
+<!-- 21 HATS -->
+<section class="slide slide-html alt">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <div class="split-even">
+      <div>
+        <p class="label label-peach">What we do</p>
+        <h2>The Hats We<br><span class="teal">Take Off You</span></h2>
+        <p style="margin-bottom:1.2rem;">So growth never means more admin, and a second clinic never means a second Cassie.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> The report - drafted while she is under the LED</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Lead follow-up - every enquiry, every channel, from site at 9pm</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> The DMs and rescheduling - off Emily's plate</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Skin Club nurture and replenishment - runs itself</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Ads and socials - built with you, then run for you</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> Reviews and referrals - asked for at the right moment</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> The Method - written down, so it can be taught</div>
+          <div style="display:flex; gap:0.5rem; font-size:0.78rem; color:var(--text-mid);"><span style="color:var(--teal-bright); flex-shrink:0;">&#10003;</span> The Monday summary - written for you before you open it</div>
+        </div>
+        <p class="mt-1" style="font-size:0.85rem; color:var(--peach-light); font-weight:600;">The only hat left is the one you want: the founder of the next two clinics.</p>
+      </div>
+      <div>
+        <img src="assets/conference-stage.jpg" alt="Kelly and Alicia presenting" style="width:100%; border-radius:12px; object-fit:cover; object-position:center top; border:2px solid rgba(0,180,160,0.2); max-height:420px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 CAMPAIGN PROCESS -->
+<section class="slide slide-html alt">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label">How it works</p>
+    <h2>Our Campaign <span class="teal">Process</span></h2>
+    <p style="max-width:720px; margin-bottom:2rem;">She sees the consultation video, a roster-skin post or a partner's offer. She takes the skin assessment or lands on her concern page. From there everything is automated, and it stops the moment she books.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:1.2rem;">
+      <div class="card" style="text-align:center; padding:1rem;"><img src="assets/campaign-ad.png" alt="Campaign" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;"><h4>Campaign</h4><p>A concern-led ad, a partner offer or a Skin Club night reaches the woman in Moranbah whose pigmentation is annoying her</p></div>
+      <div class="card" style="text-align:center; padding:1rem;"><img src="assets/campaign-crm.png" alt="Into CRM" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;"><h4>Into CRM</h4><p>She takes the skin assessment or lands on the concern page. Name, phone, email, concern and roster captured and tagged</p></div>
+      <div class="card" style="text-align:center; padding:1rem;"><img src="assets/campaign-followup.png" alt="Follow Up" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;"><h4>5-Day Follow Up</h4><p>Automated SMS, email and a call from Emily if she does not book straight away, timed to when she is home</p></div>
+      <div class="card" style="text-align:center; padding:1rem;"><img src="assets/campaign-booked.png" alt="Booked" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:6px; margin-bottom:0.8rem;"><h4 style="color:var(--peach);">Booked</h4><p>The $249 consultation booked in Timely, and the automation stops the moment she books</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 23 YOUR PART -->
+<section class="slide slide-html alt">
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label label-peach">Team effort</p>
+    <h2>Your Part in <span class="teal">the Success</span></h2>
+    <p style="max-width:700px; margin-bottom:1.5rem;">We can't control every aspect of your business. The overall success comes down to a team effort. This is what we need from you.</p>
+    <div class="grid-2">
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;"><img src="assets/yourpart-experience.png" alt="Film it" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;"><div><h4>Let us film the consultation</h4><p>One filming day with a real client, start to finish, with consent. That footage is the hero ad, the website and a month of content.</p></div></div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;"><img src="assets/yourpart-ba.png" alt="Before & Afters" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;"><div><h4>Observ photos, with consent</h4><p>The same light, the same angle, every visit. Consent captured at the consultation. The results page and the case studies come from this.</p></div></div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;"><img src="assets/yourpart-clinic.png" alt="Clinic" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;"><div><h4>Show up in town</h4><p>Emily at the events and the partners' doors. The system tracks the relationships, but the relationships are yours.</p></div></div>
+      <div class="card" style="padding:1rem; display:flex; gap:1rem; align-items:center;"><img src="assets/yourpart-rebook.png" alt="Rebook" style="width:120px; height:120px; object-fit:cover; border-radius:6px; flex-shrink:0;"><div><h4>Skin Club and rebook, every time</h4><p>Every consultation ends with the plan on screen, the Skin Club offered and the next appointment booked before she leaves. Then the system holds it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 THE OFFER -->
+<section class="slide slide-html">
+  <div class="glow glow-br"></div>
+  <div class="inner">
+    <div class="split-even">
+      <div>
+        <p class="label">Your path forward</p>
+        <h2>Thirty days, in your clinic.<br><span class="teal">Then we run it with you.</span></h2>
+        <p style="margin-bottom:0.8rem; font-size:0.8rem;">This is the Dr Wesley model, for your whole clinic. Kelly and Alicia come to Moranbah and build it in the room with you and Emily. You told us you need someone to action it. That is what this is.</p>
+        <div class="faq-item"><p class="faq-q">Week 1 - On site. The foundations</p><p class="faq-a" style="font-size:0.74rem;">Your own GHL in your name, joined to Timely. The business brain written with you. The report system built from your own reports and live in the room by the end of the week. Tracking on Meta and Google fixed. The Method, step one to twelve, written down as we watch you do it.</p></div>
+        <div class="faq-item"><p class="faq-q">Week 2 - The follow-up and the film</p><p class="faq-a" style="font-size:0.74rem;">The post-consultation ladder, Skin Club nurture, re-engagement, reviews and referrals live. The skin assessment on the site and in the bio. The consultation filmed start to finish, the 7/7 series shot, the ad set built on Alicia's layouts.</p></div>
+        <div class="faq-item"><p class="faq-q">Week 3 - Launch</p><p class="faq-a" style="font-size:0.74rem;">The three Meta campaigns and Google live. The first partnerships signed and the referral engine on. The new site structured for Moranbah before it launches. Emily trained as community manager.</p></div>
+        <div class="faq-item"><p class="faq-q">Week 4 - The Monday screen, handover</p><p class="faq-a" style="font-size:0.74rem;">Dashboard live with the written summary. The Method documented as the operations manual for clinic two. Recorded handover. Then from month two we run it with you.</p></div>
+      </div>
+      <div>
+        <div class="price-card">
+          <p class="price-period">The 30-day on-site intensive</p>
+          <div class="price-tag">$9,750</div>
+          <p style="font-size:0.7rem; color:var(--text-faint); margin-top:0.2rem;">all inclusive &middot; travel to Moranbah included &middot; payment plan available</p>
+          <ul class="includes-list">
+            <li>Kelly and Alicia in your clinic, with you and Emily</li>
+            <li>The report system, live in week one</li>
+            <li>Your own GHL, joined to Timely, the business brain</li>
+            <li>The consultation filmed, the 7/7 series, the ad set</li>
+            <li>Three Meta campaigns and Google, launched</li>
+            <li>Ladder, Skin Club nurture, re-engagement, reviews, referrals</li>
+            <li>Skin assessment, results page, site structure for the rebuild</li>
+            <li>Community partnerships and the referral engine started</li>
+            <li>The Aesthetic Advisory Method, documented</li>
+            <li>The Monday screen, Emily trained</li>
+          </ul>
+          <p class="price-period" style="margin-top:1rem;">Then, from month two - we run it with you</p>
+          <div class="price-tag" style="font-size:1.8rem;">$1,000 <span style="font-size:0.85rem; color:var(--text-faint); font-weight:400;">per week</span></div>
+          <p style="font-size:0.68rem; color:var(--text-faint); margin-top:0.2rem;">The whole system, the ads and the socials, maintained and run for the clinic. Ad spend on top, in your own account. One contact. No lock-in. When clinic two opens, it inherits all of it.</p>
+          <div class="discount-badge">Five clinics a month. The deposit holds one of them.</div>
+          <a href="https://link.fastpaydirect.com/payment-link/6aa0e2f3e9a073174b3b555c" target="_blank" style="display:block; margin-top:0.7rem; text-align:center; background:var(--teal-bright); color:#062B27; font-family:'Montserrat',sans-serif; font-weight:800; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.7rem 0.8rem; border-radius:6px; text-decoration:none;">Pay the $500 deposit and hold your dates &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 25 WHAT WE BUILD TOGETHER -->
+<section class="slide slide-html alt">
+  <div class="dot-overlay"></div>
+  <div class="glow glow-tl"></div>
+  <div class="inner">
+    <p class="label label-peach">Everything you walk out with</p>
+    <h2>What We <span class="teal">Build Together</span></h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.2rem; margin-top:1.5rem;">
+      <div class="card" style="padding:1.2rem;"><h4>The report system</h4><p>Observ, voice note, draft in your template, the therapist's call, on screen before she leaves. Under ten minutes. The same words for the same finding in every clinic.</p></div>
+      <div class="card" style="padding:1.2rem;"><h4>Meta &amp; Google</h4><p>The consultation film, the Moranbah skin campaign, retargeting, and tight Google search for intent. Built with you, then run for you.</p></div>
+      <div class="card" style="padding:1.2rem;"><h4>CRM &amp; automations</h4><p>Your own GHL joined to Timely. The ladder, Skin Club nurture, replenishment, re-engagement, reviews, referrals, the after-hours assistant.</p></div>
+      <div class="card" style="padding:1.2rem;"><h4>Own Moranbah</h4><p>The partnership offer and tracking, the referral engine, Google Business Profile and local SEO, the Skin Club night run sheet.</p></div>
+      <div class="card" style="padding:1.2rem;"><h4>The 7/7 content engine</h4><p>The consultation footage, the seven hooks, staff spotlights, follow-your-client case studies, and Emily running it as community manager.</p></div>
+      <div class="card" style="padding:1.2rem;"><h4>The Method &amp; the Monday screen</h4><p>Twelve steps documented with scripts, templates and KPIs. One screen every Monday. The operations manual and the dashboard for clinic two.</p></div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;"><a href="https://link.fastpaydirect.com/payment-link/6aa0e2f3e9a073174b3b555c" target="_blank" style="display:inline-block; background:var(--teal-bright); color:var(--dark); padding:0.9rem 2rem; border-radius:6px; font-family:'Montserrat',sans-serif; font-size:0.8rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none;">$500 deposit holds your dates &#8594;</a><p style="font-size:0.7rem; color:var(--text-faint); margin-top:0.6rem;">$9,750 all inclusive for the 30 days on site &middot; then $1,000 per week, ad spend on top &middot; one contact, no lock-in</p></div>
+  </div>
+</section>
+
+</div>
+
+<div class="slide-counter" id="counter">1 / --</div>
+<div class="nav-hint">Arrow keys to navigate &middot; F for fullscreen</div>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+const total = slides.length;
+counter.textContent = '1 / ' + total;
+function updateCounter() {
+  const current = Math.round(deck.scrollTop / window.innerHeight) + 1;
+  counter.textContent = current + ' / ' + total;
+}
+deck.addEventListener('scroll', updateCounter);
+document.addEventListener('keydown', function(e) {
+  const h = window.innerHeight;
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); deck.scrollBy({top:h, behavior:'smooth'}); }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); deck.scrollBy({top:-h, behavior:'smooth'}); }
+  if (e.key === 'Home') { e.preventDefault(); deck.scrollTo({top:0, behavior:'smooth'}); }
+  if (e.key === 'End') { e.preventDefault(); deck.scrollTo({top:deck.scrollHeight, behavior:'smooth'}); }
+  if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+});
+var ua = navigator.userAgent || '';
+if (/FBAN|FBAV|Instagram|Line|Messenger/i.test(ua)) {
+  var banner = document.getElementById('inapp-banner');
+  var link = document.getElementById('inapp-link');
+  if (banner) { banner.style.display = 'block'; }
+  if (link) { link.href = window.location.href; }
+}
+</script>
+</body>
+</html>
