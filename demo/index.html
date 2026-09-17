@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Skin Reset Report Demo - The Aesthetic Advisory</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;600;700&display=swap">
+<style>
+:root{--ink:#0B0B0B;--mute:#6b6b6b;--line:#dcdcdc;--paper:#f5f5f3;--silver:linear-gradient(90deg,#8f8f8f,#e8e8e8,#8f8f8f)}
+*{box-sizing:border-box}html,body{overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Montserrat,system-ui,sans-serif;font-weight:300;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{background:var(--ink);color:#fff;padding:54px 0 46px;text-align:center}
+.the{font-size:11px;letter-spacing:.4em}.rule{height:1px;background:var(--silver);max-width:340px;margin:9px auto}
+.brand{font-family:'Playfair Display',serif;font-size:24px;letter-spacing:.26em}
+header h1{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(28px,5vw,44px);margin:30px 0 10px;line-height:1.15}
+header p{margin:0 auto;max-width:640px;color:#cfcfcf;font-size:16px}
+.bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.btn{background:#fff;color:var(--ink);border:0;padding:13px 22px;font:700 12px Montserrat;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:#fff;border:1px solid #777}
+.demo{display:grid;grid-template-columns:260px 1fr;gap:26px;margin:40px 0}
+@media(max-width:820px){.demo{grid-template-columns:1fr}}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{display:flex;gap:12px;align-items:center;padding:11px 12px;border-left:3px solid transparent;color:#9a9a9a;font-size:14px;transition:.3s}
+.steps li b{width:26px;height:26px;border:1px solid #bbb;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600;flex:none}
+.steps li.on{color:var(--ink);border-color:var(--ink);background:#fff}
+.steps li.on b{background:var(--ink);color:#fff;border-color:var(--ink)}
+.steps li.done{color:var(--ink)}.steps li.done b{background:#e9e9e9;border-color:#e9e9e9}
+@media(max-width:820px){.steps{display:flex;overflow-x:auto;gap:4px}.steps li{flex:none;border-left:0;border-bottom:3px solid transparent;padding:8px 10px;font-size:12px}.steps li.on{border-color:var(--ink)}}
+.screen{background:#fff;border:1px solid var(--line);min-height:560px;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.08)}
+.chrome{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--mute)}
+.chrome i{width:10px;height:10px;border-radius:50%;background:#ddd;display:block}
+.chrome span{margin-left:10px}
+.stage{padding:26px}
+.panel{display:none;animation:in .45s ease}.panel.show{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.label{font:700 11px Montserrat;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin:0 0 10px}
+.big{font-family:'Playfair Display',serif;font-size:26px;margin:0 0 16px;line-height:1.2}
+.mic{display:flex;align-items:center;gap:16px;background:var(--ink);color:#fff;padding:18px 20px}
+.dot{width:14px;height:14px;border-radius:50%;background:#e24;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.wave{display:flex;gap:3px;align-items:center;height:40px;flex:1}
+.wave i{display:block;width:4px;background:#fff;border-radius:2px;animation:w .9s ease-in-out infinite}
+@keyframes w{0%,100%{height:6px}50%{height:36px}}
+.time{font-variant-numeric:tabular-nums;font-weight:600}
+.note{font-size:13px;color:var(--mute);margin-top:12px}
+.typed{font-size:15.5px;line-height:1.7;min-height:220px;white-space:pre-wrap;border-left:3px solid var(--ink);padding-left:16px}
+.caret{display:inline-block;width:2px;height:1em;background:var(--ink);vertical-align:-2px;animation:pulse .8s infinite}
+.check{list-style:none;margin:0;padding:0;border:1px solid var(--line)}
+.check li{display:grid;grid-template-columns:150px 1fr 28px;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px;opacity:0;transform:translateX(-8px);transition:.35s}
+.check li.in{opacity:1;transform:none}.check li:last-child{border:0}
+.check li span:first-child{font-weight:600}
+.check li em{font-style:normal;color:#1a8f55;font-weight:700;text-align:right}
+@media(max-width:560px){.check li{grid-template-columns:1fr 24px}.check li span:first-child{grid-column:1/-1}}
+.yes{margin-top:16px;display:inline-block;background:var(--ink);color:#fff;padding:10px 18px;font:700 12px Montserrat;letter-spacing:.12em;text-transform:uppercase;opacity:0;transition:.3s}
+.yes.in{opacity:1}
+.gen{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:560px){.gen{grid-template-columns:repeat(2,1fr)}}
+.gen img{width:100%;display:block;border:1px solid var(--line);box-shadow:0 8px 22px rgba(0,0,0,.12);opacity:0;transform:translateY(24px) scale(.96);transition:.55s}
+.gen img.in{opacity:1;transform:none}
+.progress{height:4px;background:#eee;margin:0 0 18px}.progress i{display:block;height:100%;width:0;background:var(--ink);transition:width .25s linear}
+.appr{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:start}
+@media(max-width:620px){.appr{grid-template-columns:1fr}}
+.appr img{width:100%;border:1px solid var(--line)}
+.q{background:var(--paper);padding:16px 18px;font-size:15px}
+.acts{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.acts span{padding:10px 16px;border:1px solid var(--ink);font:700 12px Montserrat;letter-spacing:.1em;text-transform:uppercase}
+.acts span.pick{background:var(--ink);color:#fff}
+.flow{display:grid;gap:12px}
+.flow div{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);opacity:.25;transition:.4s}
+.flow div.in{opacity:1;border-color:var(--ink)}
+.flow .ic{width:44px;height:44px;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 13px Montserrat}
+.flow b{display:block;font-weight:600}.flow small{color:var(--mute);font-size:13px}
+.flow em{font-style:normal;font-weight:700;color:#1a8f55;font-size:13px}
+.done-card{text-align:center;padding:30px 10px}
+.done-card .big{font-size:34px}
+.clock{display:inline-grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:10px 0 6px;text-align:left}
+.clock div{background:#fff;padding:14px 22px}.clock span{display:block;font-size:12px;color:var(--mute)}.clock strong{font-family:'Playfair Display',serif;font-size:30px;font-weight:600}
+.clock div.us{background:var(--ink);color:#fff}.clock div.us span{color:#bbb}
+section.value{background:#fff;border-top:1px solid var(--line);padding:56px 0}
+section.value h2{font-family:'Playfair Display',serif;font-weight:400;font-size:clamp(26px,4vw,36px);margin:0 0 8px}
+.calc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
+@media(max-width:700px){.calc{grid-template-columns:1fr}}
+.calc label{font:700 11px Montserrat;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:6px}
+.calc input{width:100%;padding:12px 14px;font:700 22px Montserrat;border:1px solid var(--line)}
+.calc small{display:block;color:var(--mute);font-size:12px;margin-top:4px}
+.res{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:700px){.res{grid-template-columns:1fr 1fr}}
+.res div{background:#fff;padding:16px}.res span{display:block;font-size:12.5px;color:var(--mute)}.res b{display:block;font:800 26px Montserrat;margin-top:4px}
+.res div.k{background:var(--ink);color:#fff}.res div.k span{color:#bbb}
+.rest{margin-top:40px;display:grid;grid-template-columns:1fr 280px;gap:26px;align-items:center;border:1px solid var(--ink);padding:26px}
+@media(max-width:760px){.rest{grid-template-columns:1fr}}
+.rest ul{margin:8px 0 0;padding-left:18px;font-size:14.5px}
+.rest .price{background:var(--ink);color:#fff;padding:22px;text-align:center}
+.rest .price s{color:#aaa;font:600 20px Montserrat}.rest .price strong{display:block;font:800 40px Montserrat;margin:6px 0 2px}
+.rest .price small{color:#ccc}
+.rest .price a{margin-top:14px}
+footer{text-align:center;color:var(--mute);font-size:12px;padding:30px 20px}
+</style></head><body>
+
+<header><div class="wrap">
+  <div class="the">THE</div><div class="rule"></div><div class="brand">AESTHETIC ADVISORY</div><div class="rule"></div>
+  <h1>Your Skin Reset report, done before she leaves</h1>
+  <p>A demo of the report system. Speak under the LED, check it, send it. Sample client and placeholder images only.</p>
+  <div class="bar"><button class="btn" id="play">Play the demo</button><a class="btn ghost" href="#value">What it is worth</a></div>
+</div></header>
+
+<div class="wrap">
+  <div class="demo">
+    <ol class="steps" id="steps">
+      <li><b>1</b>Voice note</li><li><b>2</b>Transcribe</li><li><b>3</b>Confirm details</li><li><b>4</b>Generate the PDF</li><li><b>5</b>Approve</li><li><b>6</b>File in Timely</li><li><b>7</b>Send and log</li>
+    </ol>
+    <div class="screen">
+      <div class="chrome"><i></i><i></i><i></i><span>Claude - Skin Reset report</span></div>
+      <div class="stage">
+
+        <div class="panel" data-p="1">
+          <p class="label">Step 1 - while the client is under LED</p>
+          <p class="big">The therapist just talks.</p>
+          <div class="mic"><span class="dot"></span><div class="wave" id="wave"></div><span class="time" id="clock">0:00</span></div>
+          <p class="note">Dictated straight into Claude, or pasted from a phone voice memo. Observ images can be dropped in too.</p>
+        </div>
+
+        <div class="panel" data-p="2">
+          <p class="label">Step 2 - transcribed and tidied</p>
+          <div class="typed" id="typed"></div>
+        </div>
+
+        <div class="panel" data-p="3">
+          <p class="label">Step 3 - Claude checks before it writes</p>
+          <p class="big">Is this right?</p>
+          <ul class="check" id="check">
+            <li><span>Client</span><span>Jess Morgan, 34, 7/7 roster</span><em>&#10003;</em></li>
+            <li><span>Concerns</span><span>Pigmentation, dry tight skin after a swing</span><em>&#10003;</em></li>
+            <li><span>What she saw</span><span>Sun damage under the surface, dehydration, mild redness, early fine lines</span><em>&#10003;</em></li>
+            <li><span>Homecare</span><span>Mild Clean, Active C, EnviroStat SPF, Complete Pigment Plus, Probiotic Mask</span><em>&#10003;</em></li>
+            <li><span>In clinic</span><span>Phase 1: Lactobotanical Peel + LED x 3, then review for Dermafrac</span><em>&#10003;</em></li>
+          </ul>
+          <span class="yes" id="yes">Therapist: yes</span>
+        </div>
+
+        <div class="panel" data-p="4">
+          <p class="label">Step 4 - built in your layout, your brand, your prices</p>
+          <div class="progress"><i id="bar"></i></div>
+          <div class="gen" id="gen">
+            <img src="pages/p1.jpg" alt="Cover"><img src="pages/p2.jpg" alt="Skin findings"><img src="pages/p3.jpg" alt="Observ images">
+            <img src="pages/p4.jpg" alt="Homecare program"><img src="pages/p5.jpg" alt="In-clinic program"><img src="pages/p6.jpg" alt="Client commitment">
+          </div>
+        </div>
+
+        <div class="panel" data-p="5">
+          <p class="label">Step 5 - nothing goes anywhere without a yes</p>
+          <div class="appr">
+            <img src="pages/p1.jpg" alt="Report cover">
+            <div>
+              <p class="q">"Jess's report is ready. Happy for this to go to Jess?"</p>
+              <div class="acts"><span>Make a change</span><span class="pick" id="ok">Approve</span></div>
+              <p class="note">The therapist reads it, tweaks anything, and makes every clinical call. Claude writes it up, it never decides what a client needs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-p="6">
+          <p class="label">Steps 6 and 7 - filed, sent, logged</p>
+          <div class="flow" id="flow">
+            <div><span class="ic">T</span><span><b>Saved to Jess's file in Timely</b><small>With her client records, where it belongs</small></span><em>Done</em></div>
+            <div><span class="ic">@</span><span><b>Emailed to Jess from the clinic</b><small>Her plan attached, with a warm note and her next appointment</small></span><em>Sent</em></div>
+            <div><span class="ic">G</span><span><b>Logged in GoHighLevel</b><small>Note and tag only: "Skin Reset report sent". The follow-up starts. No skin details stored there.</small></span><em>Logged</em></div>
+          </div>
+        </div>
+
+        <div class="panel" data-p="7">
+          <div class="done-card">
+            <p class="label">Before she has left the room</p>
+            <p class="big">Report done, presented, sent.</p>
+            <div class="clock"><div><span>Now, after hours</span><strong>30-45 min</strong></div><div class="us"><span>With the system</span><strong>~10 min</strong></div></div>
+            <p class="note">And the plan is on screen while she is still excited, which is when she says yes.</p>
+            <div class="bar"><button class="btn" style="border:1px solid var(--ink)" id="again">Play again</button><a class="btn" style="background:var(--ink);color:#fff" href="#value">What it is worth</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="value" id="value"><div class="wrap">
+  <p class="label">The report system on its own</p>
+  <h2>What those reports cost you, and what you get back</h2>
+  <p>You told us each report takes 30 to 45 minutes, done after the client has gone. Put your own numbers in.</p>
+  <div class="calc">
+    <div><label for="n">Skin Resets a week</label><input id="n" type="number" min="0" value="10" inputmode="numeric"><small>Change this to your real number</small></div>
+    <div><label for="m">Minutes per report now</label><input id="m" type="number" min="0" step="5" value="40" inputmode="numeric"><small>You said 30 to 45</small></div>
+    <div><label for="r">Value of an hour ($)</label><input id="r" type="number" min="0" step="5" value="35" inputmode="numeric"><small>Your time, or a therapist's</small></div>
+  </div>
+  <div class="res">
+    <div><span>With the system, per report</span><b>10 min</b></div>
+    <div><span>Hours back a week</span><b id="hw">-</b></div>
+    <div><span>Hours back a year</span><b id="hy">-</b></div>
+    <div class="k"><span>That time is worth, a year</span><b id="dy">-</b></div>
+  </div>
+
+  <div class="rest">
+    <div>
+      <p class="label">And that is one piece of it</p>
+      <h2 style="font-size:26px">The rest of your thirty days</h2>
+      <ul>
+        <li>AIOS installed, in your own account</li>
+        <li>GoHighLevel set up and joined to Timely</li>
+        <li>Your Business Brain, written with you</li>
+        <li>Three ad offers across Meta and Google, each with its own landing page</li>
+        <li>Conversational AI answering messages and DMs day and night</li>
+        <li>Filming with Kelly for the ads and landing pages</li>
+        <li>Follow-up that runs itself: Skin Club nurture, re-engagement, reviews, referrals</li>
+        <li>Kelly and Alicia in your clinic, building it with you and showing your team how to run it</li>
+      </ul>
+    </div>
+    <div class="price">
+      <s>$50,500 of work</s>
+      <strong>$7,500</strong>
+      <small>including GST, plus travel</small><br>
+      <a class="btn" href="../value/">See every piece</a>
+    </div>
+  </div>
+</div></section>
+
+<footer>Clinic Catalyst for The Aesthetic Advisory &middot; Demo with a made-up client and placeholder images &middot; Confidential</footer>
+
+<script>
+(function(){
+  var wave=document.getElementById('wave');
+  for(var i=0;i<34;i++){var s=document.createElement('i');s.style.animationDelay=(i*0.07%0.9)+'s';wave.appendChild(s);}
+  var note="Skin Reset for Jess Morgan, 34, on a seven and seven roster at the mine.\n\nMain concerns are pigmentation across her cheeks and forehead, and her skin feels tight and dry after a week on site.\n\nPigmentation mode shows a lot more sun damage under the surface than you can see. Parallel-polarised shows dehydration, she has been using a scrub at home. Mild redness through the cheeks. Early fine lines around the eyes.\n\nHomecare: Mild Clean, Active C, EnviroStat SPF, Complete Pigment Plus at night, Probiotic Mask twice a week.\n\nStart her on phase one, the lactobotanical peel with LED, three monthly, then we look at Dermafrac.";
+  var steps=[].slice.call(document.querySelectorAll('#steps li'));
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  var timers=[];
+  function T(fn,ms){timers.push(setTimeout(fn,ms));}
+  function clear(){timers.forEach(clearTimeout);timers=[];}
+  function show(p){
+    panels.forEach(function(x){x.classList.toggle('show',x.dataset.p==p);});
+    steps.forEach(function(li,i){var n=i+1;var active=(p==7)?false:(n==p||(p==6&&n==7));li.classList.toggle('on',active);li.classList.toggle('done',n<p||p==7);});
+  }
+  function reset(){
+    document.getElementById('typed').textContent='';
+    document.querySelectorAll('#check li,#gen img,#flow div').forEach(function(e){e.classList.remove('in');});
+    document.getElementById('yes').classList.remove('in');document.getElementById('bar').style.width='0';
+  }
+  function run(){
+    clear();reset();var t=0;
+    show(1);var sec=0;var c=document.getElementById('clock');c.textContent='0:00';
+    for(var i=1;i<=4;i++){(function(k){T(function(){sec=k*20;c.textContent=Math.floor(sec/60)+':'+('0'+sec%60).slice(-2);},k*700);})(i);}
+    t=3200;
+    T(function(){show(2);var el=document.getElementById('typed');var i=0;(function type(){if(i<=note.length){el.innerHTML=note.slice(0,i).replace(/</g,'&lt;')+'<span class="caret"></span>';i+=3;timers.push(setTimeout(type,14));}})();},t);
+    t+=note.length/3*14+1400;
+    T(function(){show(3);document.querySelectorAll('#check li').forEach(function(li,i){T(function(){li.classList.add('in');},250+i*380);});T(function(){document.getElementById('yes').classList.add('in');},250+5*380+300);},t);
+    t+=3300;
+    T(function(){show(4);var bar=document.getElementById('bar');document.querySelectorAll('#gen img').forEach(function(im,i){T(function(){im.classList.add('in');bar.style.width=((i+1)/6*100)+'%';},300+i*520);});},t);
+    t+=4000;
+    T(function(){show(5);},t);
+    t+=2800;
+    T(function(){show(6);document.querySelectorAll('#flow div').forEach(function(d,i){T(function(){d.classList.add('in');},300+i*700);});},t);
+    t+=3000;
+    T(function(){show(7);},t);
+  }
+  document.getElementById('play').addEventListener('click',function(){document.querySelector('.demo').scrollIntoView({behavior:'smooth'});run();});
+  document.getElementById('again').addEventListener('click',run);
+  var started=false;
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!started){started=true;run();}});},{threshold:.35}).observe(document.querySelector('.screen'));
+  show(1);
+  function v(id){var x=parseFloat(document.getElementById(id).value);return isNaN(x)||x<0?0:x;}
+  function calc(){var n=v('n'),m=v('m'),r=v('r'),s=Math.max(m-10,0),hw=n*s/60,hy=hw*48;
+    document.getElementById('hw').textContent=(Math.round(hw*10)/10)+' hrs';
+    document.getElementById('hy').textContent=Math.round(hy).toLocaleString('en-AU')+' hrs';
+    document.getElementById('dy').textContent='$'+Math.round(hy*r).toLocaleString('en-AU');}
+  ['n','m','r'].forEach(function(id){document.getElementById(id).addEventListener('input',calc);});calc();
+})();
+</script>
+</body></html>
