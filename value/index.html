@@ -1,0 +1,410 @@
+<title>The Aesthetic Advisory Value Breakdown</title>
+<style>
+  :root{
+    --dark:#0A2A28;
+    --teal:#00D4BC;
+    --teal-mid:#00B4A0;
+    --teal-dark:#00796D;
+    --paper:#FFFFFF;
+    --paper-2:#F2F6F5;
+    --ink:#0A2A28;
+    --ink-2:#38534F;
+    --mute:#6B807D;
+    --line:#D8E3E1;
+    --head:'Montserrat',-apple-system,'Segoe UI',Arial,sans-serif;
+    --body:'Open Sans',-apple-system,'Segoe UI',Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0A2A28;--paper-2:#0E3936;--ink:#EAF5F3;--ink-2:#C4DAD6;
+      --mute:#8FA9A5;--line:#1C4C48;--teal-dark:#3FE0CC;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0A2A28;--paper-2:#0E3936;--ink:#EAF5F3;--ink-2:#C4DAD6;
+    --mute:#8FA9A5;--line:#1C4C48;--teal-dark:#3FE0CC;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-weight:300;font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding-inline:20px}
+
+  /* header */
+  .top{
+    background:var(--dark);
+    background-image:radial-gradient(rgba(0,212,188,.16) 1px,transparent 1px);
+    background-size:16px 16px;padding-block:36px 32px;
+  }
+  .top img{display:block;height:24px;width:auto;margin-bottom:24px}
+  .top .for{
+    font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--teal);margin:0 0 10px;
+  }
+  h1{
+    font-family:var(--head);font-weight:800;font-size:clamp(28px,5.5vw,42px);
+    line-height:1.05;text-transform:uppercase;color:#fff;margin:0;
+  }
+
+  /* section */
+  .block{padding-block:44px 0}
+  .band{
+    font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--teal-dark);margin:0 0 20px;
+    padding-bottom:10px;border-bottom:2px solid var(--dark);
+  }
+  .cols{display:grid;grid-template-columns:minmax(0,1fr) 16.5rem;gap:34px}
+
+  /* included list */
+  .inc{margin:0;padding:0;list-style:none}
+  .inc li{
+    position:relative;padding:0 0 11px 26px;font-size:15.5px;color:var(--ink-2);
+    display:grid;grid-template-columns:minmax(0,1fr) 5.5rem;gap:0 14px;align-items:baseline;
+  }
+  .inc li::before{
+    content:"";position:absolute;left:0;top:.55em;width:10px;height:10px;
+    background:var(--teal-mid);
+  }
+  .inc li b{font-family:var(--head);font-weight:700;color:var(--ink);font-size:15px}
+
+  /* price card */
+  .card{
+    background:var(--dark);
+    background-image:radial-gradient(rgba(0,212,188,.16) 1px,transparent 1px);
+    background-size:16px 16px;
+    padding:26px 24px 24px;align-self:start;border-top:4px solid var(--teal);
+  }
+  .card .was{
+    font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:rgba(255,255,255,.62);margin:0 0 6px;
+  }
+  .card .old{
+    font-family:var(--head);font-weight:800;font-size:30px;margin:0 0 20px;
+    color:rgba(255,255,255,.55);text-decoration:line-through;
+    text-decoration-thickness:3px;text-decoration-color:var(--teal);
+    font-variant-numeric:tabular-nums;
+  }
+  .card .now{
+    font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--teal);margin:0 0 6px;
+    padding-top:18px;border-top:1px solid rgba(255,255,255,.18);
+  }
+  .card .fig{
+    font-family:var(--head);font-weight:800;font-size:clamp(34px,7vw,46px);line-height:1;
+    color:#fff;margin:0;font-variant-numeric:tabular-nums;
+  }
+  .card .fig small{display:block;font-family:var(--body);font-weight:400;font-size:13px;
+    color:var(--teal);letter-spacing:.04em;margin-top:8px}
+
+  .inc li .m{text-align:right;white-space:nowrap;line-height:1.25}
+  .inc li .m s{
+    display:block;font-family:var(--head);font-weight:700;font-size:14.5px;
+    font-variant-numeric:tabular-nums;color:var(--mute);text-decoration:line-through;
+    text-decoration-thickness:2px;
+  }
+  .inc li .m em{
+    display:block;font-style:normal;font-family:var(--head);font-weight:800;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dark);
+  }
+  .inc li .m em.pay{font-size:13px;letter-spacing:.04em;text-transform:none;color:var(--ink);white-space:normal}
+  .inc li.hero{background:var(--paper-2);padding:14px 14px 14px 26px;margin-bottom:6px}
+  .inc li.hero::before{left:10px;top:1.05em}
+  .also{margin:20px 0 0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+  .also b{font-weight:600;color:var(--ink)}
+
+  .plain{
+    margin:0 0 22px;font-size:17px;line-height:1.6;color:var(--ink);
+    border-left:6px solid var(--teal-mid);padding:2px 0 2px 16px;
+  }
+  .plain b{font-family:var(--head);font-weight:800;color:var(--teal-dark)}
+
+  /* one price panel */
+  .allin{margin-top:30px;padding:18px 20px;background:var(--dark);color:#fff}
+  .allin .l{
+    margin:0 0 6px;font-family:var(--head);font-weight:800;font-size:12px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
+  }
+  .allin p:last-child{margin:0;font-size:15px;line-height:1.55}
+
+  /* website ladder */
+  .ladder{margin-top:30px;border:2px solid var(--line);padding:22px 22px 18px;background:var(--paper-2)}
+  .ladder h2{
+    font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;margin:0 0 4px;color:var(--ink);
+  }
+  .ladder .sub{margin:0 0 16px;font-size:14.5px;color:var(--mute)}
+  .ladder .step{
+    display:grid;grid-template-columns:minmax(0,1fr) 6.5rem;gap:0 16px;align-items:baseline;
+    padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-2);
+  }
+  .ladder .step span:last-child{
+    text-align:right;white-space:nowrap;font-family:var(--head);font-weight:700;
+    font-variant-numeric:tabular-nums;color:var(--teal-dark);
+  }
+  .ladder .sum{
+    display:grid;grid-template-columns:minmax(0,1fr) 6.5rem;gap:0 16px;align-items:baseline;
+    padding:14px 0 0;
+  }
+  .ladder .sum p{margin:0}
+  .ladder .sum .l{font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .ladder .sum .v{
+    text-align:right;font-family:var(--head);font-weight:800;font-size:22px;
+    font-variant-numeric:tabular-nums;
+  }
+  .ladder .note{
+    margin:14px 0 0;padding:12px 14px;background:var(--dark);color:#fff;font-size:14.5px;
+  }
+  .ladder .note b{color:var(--teal);font-weight:600}
+
+  .worthline{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:0 0 12px;
+  }
+  .worthline span{font-size:14px;color:var(--mute)}
+  .worthline s{
+    font-family:var(--head);font-weight:700;font-size:16px;color:var(--mute);
+    text-decoration:line-through;text-decoration-thickness:2px;
+  }
+  .worthline em{
+    font-style:normal;font-family:var(--head);font-weight:800;font-size:17px;color:var(--teal-dark);
+  }
+
+  .bonus{
+    margin-top:34px;padding:26px 24px 22px;background:var(--dark);color:#fff;
+    border-top:6px solid var(--teal-mid);
+  }
+  .bonus .tag{
+    margin:0 0 10px;font-family:var(--head);font-weight:800;font-size:11.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--teal);
+  }
+  .bonus h2{
+    margin:0 0 12px;font-family:var(--head);font-weight:800;font-size:26px;line-height:1.15;color:#fff;
+  }
+  .bonus p{margin:0 0 12px;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.88)}
+  .bonus .lead{font-size:17px;color:#fff}
+  .bonus em{font-style:normal;color:var(--teal)}
+  .bonus .asks{display:flex;flex-direction:column;gap:8px;margin:0 0 14px}
+  .bonus .asks em{
+    font-style:normal;color:var(--teal);font-size:16px;line-height:1.45;
+    border-left:3px solid var(--teal-mid);padding-left:12px;
+  }
+  .bonus .fine{margin:16px 0 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.22);font-size:14px}
+
+  .flag .rec{
+    margin:0 0 6px;font-family:var(--head);font-weight:800;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark);
+  }
+
+  .signon{
+    margin-top:26px;padding:20px 22px;border:2px solid var(--teal-mid);background:var(--paper-2);
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;
+  }
+  .signon .l{
+    margin:0 0 4px;font-family:var(--head);font-weight:800;font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark);
+  }
+  .signon .big{margin:0;font-family:var(--head);font-weight:800;font-size:24px;color:var(--ink)}
+  .signon .s{margin:6px 0 0;font-size:14px;color:var(--mute);max-width:34rem}
+  .signon .plan{
+    margin:10px 0 0;padding:10px 12px;background:#fff;border-left:4px solid var(--teal-mid);
+    font-size:14.5px;line-height:1.55;color:var(--ink-2);max-width:34rem;
+  }
+  .signon .plan b{font-family:var(--head);font-weight:700;color:var(--ink)}
+  .signon a{
+    flex:0 0 auto;background:var(--dark);color:#fff;text-decoration:none;
+    font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    padding:14px 22px;
+  }
+  .look{margin-top:34px;border:2px solid var(--line);padding:22px}
+  .look h2{
+    margin:0 0 4px;font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink);
+  }
+  .look .s{margin:0 0 14px;font-size:14.5px;color:var(--mute)}
+  .look a{
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+    padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);
+  }
+  .look a b{font-family:var(--head);font-weight:700;font-size:15px;display:block}
+  .look a .t{display:block;font-size:14px;color:var(--mute)}
+  .look a .go{
+    flex:0 0 auto;font-family:var(--head);font-weight:800;font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);
+  }
+
+
+  .calc{margin-top:8px;border:2px solid var(--teal-mid);padding:24px 22px;background:var(--paper-2)}
+  .calc .l{margin:0 0 6px;font-family:var(--head);font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark)}
+  .calc h2{margin:0 0 10px;font-family:var(--head);font-weight:800;font-size:24px;line-height:1.2;color:var(--ink)}
+  .calc .said{margin:0 0 18px;padding-left:14px;border-left:3px solid var(--teal-mid);font-size:15.5px;line-height:1.55;color:var(--ink-2)}
+  .calc .said em{font-style:italic;color:var(--ink)}
+  .calc .ins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:0 0 18px}
+  .calc label{display:block;font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+  .calc input{width:100%;box-sizing:border-box;padding:12px 14px;font-size:20px;font-family:var(--head);font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .calc .hint{display:block;margin-top:5px;font-size:12.5px;color:var(--mute)}
+  .calc .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+  .calc .res div{background:#fff;padding:14px 14px 12px}
+  .calc .res span{display:block;font-size:12.5px;color:var(--mute);line-height:1.35}
+  .calc .res b{display:block;margin-top:4px;font-family:var(--head);font-weight:800;font-size:24px;color:var(--teal-dark);font-variant-numeric:tabular-nums}
+  .calc .res div.big{background:var(--dark)}
+  .calc .res div.big span{color:rgba(255,255,255,.75)}
+  .calc .res div.big b{color:#fff}
+  .calc .foot{margin:14px 0 0;font-size:14px;line-height:1.55;color:var(--ink-2)}
+  .inc li .m em.time{color:var(--teal-dark)}
+  .monthly2{margin-top:26px;padding:18px 22px;border-left:6px solid var(--teal-mid);background:var(--paper-2)}
+  .monthly2 .l{margin:0 0 4px;font-family:var(--head);font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark)}
+  .monthly2 .big{margin:0 0 6px;font-family:var(--head);font-weight:800;font-size:22px;color:var(--ink)}
+  .monthly2 p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+
+  html,body{overflow-x:clip}
+  /* simple call-outs */
+  .flag{border-left:6px solid var(--teal-mid);background:var(--paper-2);padding:20px 22px;margin-top:34px}
+  .flag h2{
+    font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--teal-dark);margin:0 0 10px;
+  }
+  .flag p{margin:0 0 10px;font-size:15.5px;color:var(--ink-2);max-width:62ch}
+  .flag p:last-child{margin:0}
+  .flag .amt{font-family:var(--head);font-weight:800;color:var(--ink)}
+
+  .look{
+    margin-top:30px;border:2px solid var(--dark);padding:22px 22px 20px;background:var(--paper);
+  }
+  .look h2{
+    font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--teal-dark);margin:0 0 6px;
+  }
+  .look p.s{margin:0 0 16px;font-size:15px;color:var(--mute)}
+  .look a{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:14px 0;border-top:1px solid var(--line);
+    color:var(--ink);text-decoration:none;font-size:15.5px;
+  }
+  .look a:last-child{border-bottom:1px solid var(--line)}
+  .look a b{font-family:var(--head);font-weight:700;font-size:15px;display:block}
+  .look a span.t{color:var(--mute);font-size:14.5px;display:block;margin-top:2px}
+  .look a span.go{
+    font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--teal-dark);white-space:nowrap;
+  }
+  .look a:hover span.go,.look a:focus-visible span.go{color:var(--ink)}
+  .look a:focus-visible{outline:2px solid var(--teal-mid);outline-offset:2px}
+
+  footer{padding-block:34px 56px;color:var(--mute);font-size:13px}
+  footer p{margin:0}
+
+  @media (max-width:680px){
+    .cols{grid-template-columns:1fr;gap:24px}
+    .inc li{grid-template-columns:minmax(0,1fr) 5.2rem;gap:0 10px}
+    .card{padding:22px 20px 20px}
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600&display=swap">
+
+<header class="top">
+  <div class="wrap">
+    <img src="cc-wordmark.png" alt="Clinic Catalyst">
+    <p class="for">The Aesthetic Advisory</p>
+    <h1>What you get.<br>What you pay.</h1>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="block">
+    <p class="band">Start here &middot; the report you write at night</p>
+    <div class="calc">
+      <p class="l">Your Skin Reset report</p>
+      <h2>What those reports cost you, and what you get back</h2>
+      <p class="said">On our call you told us each report takes <em>30 to 45 minutes</em>, and it gets done after the client has gone. Put in your own numbers below.</p>
+      <div class="ins">
+        <div><label for="n">Skin Resets a week</label><input id="n" type="number" min="0" step="1" value="10" inputmode="numeric"><span class="hint">Change this to your real number</span></div>
+        <div><label for="m">Minutes per report now</label><input id="m" type="number" min="0" step="5" value="40" inputmode="numeric"><span class="hint">You said 30 to 45</span></div>
+        <div><label for="r">Value of an hour ($)</label><input id="r" type="number" min="0" step="5" value="35" inputmode="numeric"><span class="hint">Your time, or a therapist's</span></div>
+      </div>
+      <div class="res">
+        <div><span>With our system, per report</span><b>10 min</b></div>
+        <div><span>Hours back every week</span><b id="hw">-</b></div>
+        <div><span>Hours back every year</span><b id="hy">-</b></div>
+        <div class="big"><span>What that time is worth a year</span><b id="dy">-</b></div>
+      </div>
+      <p class="foot">Those hours are your evenings back. And when clinic two and three open on the same system, the saving multiplies instead of the reports landing back on you.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="band">What you get &middot; what it is worth &middot; what you pay</p>
+    <p class="plain">Your thirty days is <b>$7,500</b>, including GST, plus travel to Moranbah. Every line below is included in it. Bought separately, the same work is <b>$50,500</b>, before you count the hours the report system gives you back.</p>
+    <div class="cols">
+      <ul class="inc">
+        <li><span class="t"><b>Your Skin Reset report system.</b> Observ images and a voice note under the LED, Claude drafts the plan in your layout, the therapist checks it and presents it before the client leaves.</span><span class="m"><em class="time">worth your time</em><em>see above</em></span></li>
+        <li><span class="t"><b>AIOS installed.</b> The AI system under the clinic, set up in your own account and trained on how The Aesthetic Advisory works.</span><span class="m"><s>$10,000</s><em>included</em></span></li>
+        <li><span class="t"><b>Three ad offers, built across Meta and Google.</b> Each one concern-led and pointing at the Skin Reset, with its own audience, ads and tracking.</span><span class="m"><s>$7,500</s><em>included</em></span></li>
+        <li><span class="t"><b>GoHighLevel set up and joined to Timely.</b> Your own account, in your name, so a booking is a booking and a lead who does not book is never lost.</span><span class="m"><s>$5,000</s><em>included</em></span></li>
+        <li><span class="t"><b>Kelly and Alicia in your clinic.</b> We build the campaigns with you and your team in the room, and show you how to run every part of it as we go.</span><span class="m"><s>$5,000</s><em>included</em></span></li>
+        <li><span class="t"><b>Follow-up that runs itself.</b> Skin Club nurture, re-engagement of past clients, review requests and referrals, all in your voice.</span><span class="m"><s>$4,500</s><em>included</em></span></li>
+        <li><span class="t"><b>A landing page for each offer.</b> Three pages, each built for one concern and one action: book the Skin Reset.</span><span class="m"><s>$3,000</s><em>included</em></span></li>
+        <li><span class="t"><b>Filming with Kelly.</b> The footage for your ads and landing pages, shot in your clinic with your team.</span><span class="m"><s>$2,500</s><em>included</em></span></li>
+        <li><span class="t"><b>The Aesthetic Advisory Method, documented.</b> Your twelve steps written down as we watch you do them, so clinic two replicates it instead of reinventing it.</span><span class="m"><s>$2,500</s><em>included</em></span></li>
+        <li><span class="t"><b>Your Business Brain, written with you.</b> Your treatments, prices, products, voice and boundaries in one place, so everything the system writes sounds like you.</span><span class="m"><s>$2,000</s><em>included</em></span></li>
+        <li><span class="t"><b>The Monday screen.</b> One dashboard with a written summary: Skin Resets booked, Skin Club, spend and cost per client.</span><span class="m"><s>$2,000</s><em>included</em></span></li>
+        <li><span class="t"><b>Community partnerships and the referral engine.</b> The partner offer, tracked by partner, and a refer-a-friend link that thanks the referrer automatically.</span><span class="m"><s>$2,000</s><em>included</em></span></li>
+        <li><span class="t"><b>Conversational AI in GoHighLevel.</b> Messages and DMs answered in your words day and night, with anything clinical passed to the team.</span><span class="m"><s>$1,500</s><em>included</em></span></li>
+        <li><span class="t"><b>Skin assessment.</b> Live on your site and in your Instagram bio, sending women into the Skin Reset with their concern already known.</span><span class="m"><s>$1,500</s><em>included</em></span></li>
+        <li><span class="t"><b>Recorded handover.</b> Every part of the system walked through on video, so your team can rewatch it.</span><span class="m"><s>$1,500</s><em>included</em></span></li>
+      </ul>
+      <div class="card">
+        <p class="was">Bought piece by piece</p>
+        <p class="old">$50,500</p>
+        <p class="now">You pay</p>
+        <p class="fig">$7,500<small>including GST &middot; plus travel</small></p>
+      </div>
+    </div>
+
+    <div class="signon">
+      <div>
+        <p class="l">To start</p>
+        <p class="big">$500 holds your dates</p>
+        <p class="s">Deducted from your $7,500, not added to it. Strictly five clinics a month.</p>
+      </div>
+      <a href="https://link.fastpaydirect.com/payment-link/6aa0e2f3e9a073174b3b555c" target="_blank" rel="noopener">Hold my dates &rarr;</a>
+    </div>
+
+    <div class="monthly2">
+      <p class="l">Then, from month two</p>
+      <p class="big">$1,000 a week, including GST</p>
+      <p>We keep running it with you: the system, the ads and the socials. No lock-in, one contact, and when clinic two opens it inherits all of it.</p>
+    </div>
+  </section>
+
+  <div class="flag">
+    <p class="rec">Not included</p>
+    <p><b>Ad spend.</b> Paid straight to Meta and Google from your own account, never through us.</p>
+    <p><b>Travel to Moranbah.</b> Quoted separately.</p>
+    <p><b>Your Claude subscription and the usage that runs on it.</b> Your AIOS and your report system live in your own Claude account, in your name, so your clients' photos and notes stay with the clinic. The subscription and any usage costs are paid by you directly. We set it up and show you how to run it.</p>
+    <p><b>Nothing else.</b> Your domain, Timely and any other subscriptions stay in your name.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  function v(id){var x=parseFloat(document.getElementById(id).value);return isNaN(x)||x<0?0:x;}
+  function fmt(n){return n.toLocaleString('en-AU',{maximumFractionDigits:1});}
+  function run(){
+    var n=v('n'),m=v('m'),r=v('r'),saved=Math.max(m-10,0);
+    var hw=n*saved/60, hy=hw*48;
+    document.getElementById('hw').textContent=fmt(Math.round(hw*10)/10)+' hrs';
+    document.getElementById('hy').textContent=fmt(Math.round(hy))+' hrs';
+    document.getElementById('dy').textContent='$'+Math.round(hy*r).toLocaleString('en-AU');
+  }
+  ['n','m','r'].forEach(function(id){document.getElementById(id).addEventListener('input',run);});
+  run();
+})();
+</script>
+
+<footer class="wrap">
+  <p>Clinic Catalyst for The Aesthetic Advisory &middot; 17 September 2026 &middot; Confidential</p>
+</footer>
