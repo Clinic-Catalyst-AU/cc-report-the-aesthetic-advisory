@@ -93,6 +93,33 @@ section.value h2{font-family:'Playfair Display',serif;font-weight:400;font-size:
 .rest .price s{color:#aaa;font:600 20px Montserrat}.rest .price strong{display:block;font:800 40px Montserrat;margin:6px 0 2px}
 .rest .price small{color:#ccc}
 .rest .price a{margin-top:14px}
+
+.rec{position:relative;display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center;min-height:420px}
+@media(max-width:620px){.rec{grid-template-columns:1fr;gap:18px}}
+.phone{width:200px;height:400px;margin:0 auto;border-radius:34px;background:#0B0B0B;color:#fff;padding:16px 16px 20px;position:relative;box-shadow:0 18px 40px rgba(0,0,0,.25);text-align:center;transition:transform .6s,opacity .6s}
+.notch{width:70px;height:18px;border-radius:0 0 12px 12px;background:#000;margin:-16px auto 16px}
+.pt{margin:6px 0 0;font:600 11px Montserrat;letter-spacing:.14em;text-transform:uppercase;color:#999}
+.pn{margin:6px 0 30px;font-family:'Playfair Display',serif;font-size:17px}
+.pwave{display:flex;gap:3px;align-items:center;justify-content:center;height:90px}
+.pwave i{display:block;width:4px;height:6px;background:#fff;border-radius:2px}
+.recording .pwave i{animation:w .9s ease-in-out infinite}
+.pclock{font:600 30px Montserrat;margin:22px 0 26px;font-variant-numeric:tabular-nums}
+.recbtn{width:62px;height:62px;border-radius:50%;border:3px solid #fff;margin:0 auto;display:grid;place-items:center}
+.recbtn span{width:26px;height:26px;border-radius:50%;background:#e2263a;transition:.3s}
+.recording .recbtn span{border-radius:6px;width:22px;height:22px;animation:pulse 1s infinite}
+.claude{border:1px solid var(--line);background:#fafafa;padding:16px;min-height:260px;display:flex;flex-direction:column;gap:12px;opacity:.35;transition:.5s}
+.claude.on{opacity:1;border-color:var(--ink)}
+.ch{margin:0;font:700 12px Montserrat;letter-spacing:.12em;text-transform:uppercase}
+.drop{flex:1;border:2px dashed #cfcfcf;display:grid;place-items:center;text-align:center;font-size:13px;color:var(--mute);padding:14px;transition:.3s}
+.drop.hot{border-color:var(--ink);background:#fff;color:var(--ink)}
+.attached{display:none;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);padding:10px 12px}
+.attached.in{display:flex;animation:in .4s ease}
+.fi{width:34px;height:34px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:16px;flex:none}
+.attached b,.fly b{display:block;font-size:13px;font-weight:600}.attached small,.fly small{color:var(--mute);font-size:12px}
+.inputrow{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);background:#fff;padding:10px 12px;font-size:14px;min-height:42px}
+.inputrow i{font-style:normal;width:26px;height:26px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px}
+.fly{position:absolute;left:30px;top:170px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--ink);padding:10px 12px;box-shadow:0 12px 30px rgba(0,0,0,.18);opacity:0;pointer-events:none;z-index:3;transition:transform 1.1s cubic-bezier(.5,0,.2,1),opacity .3s}
+.fly.go{opacity:1}
 footer{text-align:center;color:var(--mute);font-size:12px;padding:30px 20px}
 </style></head><body>
 
@@ -114,9 +141,24 @@ footer{text-align:center;color:var(--mute);font-size:12px;padding:30px 20px}
 
         <div class="panel" data-p="1">
           <p class="label">Step 1 - while the client is under LED</p>
-          <p class="big">The therapist just talks.</p>
-          <div class="mic"><span class="dot"></span><div class="wave" id="wave"></div><span class="time" id="clock">0:00</span></div>
-          <p class="note">Dictated straight into Claude, or pasted from a phone voice memo. Observ images can be dropped in too.</p>
+          <p class="big" id="s1t">The therapist records a voice note.</p>
+          <div class="rec">
+            <div class="phone" id="phone">
+              <div class="notch"></div>
+              <p class="pt">Voice Memo</p>
+              <p class="pn">Skin Reset - Jess</p>
+              <div class="pwave" id="wave"></div>
+              <p class="pclock" id="clock">0:00</p>
+              <div class="recbtn" id="recbtn"><span></span></div>
+            </div>
+            <div class="fly" id="fly"><span class="fi">&#9835;</span><span><b>Skin Reset - Jess.m4a</b><small>1:24</small></span></div>
+            <div class="claude" id="claude">
+              <p class="ch">Claude</p>
+              <div class="drop" id="drop">Drop the voice note or Observ images here</div>
+              <div class="attached" id="attached"><span class="fi">&#9835;</span><span><b>Skin Reset - Jess.m4a</b><small>Uploaded</small></span></div>
+              <div class="inputrow"><span id="cmd"></span><i>&#8593;</i></div>
+            </div>
+          </div>
         </div>
 
         <div class="panel" data-p="2">
@@ -245,9 +287,18 @@ footer{text-align:center;color:var(--mute);font-size:12px;padding:30px 20px}
   }
   function run(){
     clear();reset();var t=0;
-    show(1);var sec=0;var c=document.getElementById('clock');c.textContent='0:00';
-    for(var i=1;i<=4;i++){(function(k){T(function(){sec=k*20;c.textContent=Math.floor(sec/60)+':'+('0'+sec%60).slice(-2);},k*700);})(i);}
-    t=3200;
+    show(1);
+    var ph=document.getElementById('phone'),c=document.getElementById('clock'),fly=document.getElementById('fly'),cl=document.getElementById('claude'),dr=document.getElementById('drop'),at=document.getElementById('attached'),cmd=document.getElementById('cmd'),title=document.getElementById('s1t');
+    ph.classList.remove('recording');ph.style.opacity=1;fly.classList.remove('go');fly.style.transform='none';cl.classList.remove('on');dr.classList.remove('hot');dr.style.display='';at.classList.remove('in');cmd.textContent='';c.textContent='0:00';
+    title.textContent='The therapist records a voice note.';
+    T(function(){ph.classList.add('recording');},500);
+    for(var i=1;i<=14;i++){(function(k){T(function(){var sec=k*6;c.textContent=Math.floor(sec/60)+':'+('0'+sec%60).slice(-2);},500+k*190);})(i);}
+    T(function(){ph.classList.remove('recording');c.textContent='1:24';title.textContent='Then drops it into Claude.';cl.classList.add('on');},3300);
+    T(function(){var pr=ph.getBoundingClientRect(),dz=dr.getBoundingClientRect(),st=fly.offsetParent.getBoundingClientRect();
+      fly.style.left=(pr.left-st.left+10)+'px';fly.style.top=(pr.top-st.top+pr.height/2-24)+'px';fly.style.transform='none';fly.classList.add('go');
+      T(function(){fly.style.transform='translate('+(dz.left-pr.left+10)+'px,'+(dz.top-pr.top-pr.height/2+dz.height/2)+'px) scale(.95)';dr.classList.add('hot');},120);},3700);
+    T(function(){fly.classList.remove('go');dr.style.display='none';at.classList.add('in');var txt='Write the Skin Reset report';var j=0;(function ty(){if(j<=txt.length){cmd.textContent=txt.slice(0,j);j++;timers.push(setTimeout(ty,35));}})();},5100);
+    t=6800;
     T(function(){show(2);var el=document.getElementById('typed');var i=0;(function type(){if(i<=note.length){el.innerHTML=note.slice(0,i).replace(/</g,'&lt;')+'<span class="caret"></span>';i+=3;timers.push(setTimeout(type,14));}})();},t);
     t+=note.length/3*14+1400;
     T(function(){show(3);document.querySelectorAll('#check li').forEach(function(li,i){T(function(){li.classList.add('in');},250+i*380);});T(function(){document.getElementById('yes').classList.add('in');},250+5*380+300);},t);
